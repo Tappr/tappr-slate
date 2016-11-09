@@ -145,12 +145,19 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"client_id\":\"7e6ebd1e-1c5e-4db8-a6be-6379c8d99f17\",\"grant_type\":\"password\",\"username\":\"daniel@mytappr.com\",\"password\":\"Password123\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e6ebd1e-1c5e-4db8-a6be-6379c8d99f17"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"grant_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password123"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="user-create">User Create</h1>
+<h1 id="users">Users</h1>
+
+<h2 id="user-create">User Create</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/user"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
     --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
@@ -174,12 +181,18 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"first_name\":\"Daniel\",\"last_name\":\"Draper\",\"email\":\"daniel@mytappr.com\",\"username\":\"daniel@mytappr.com\",\"password\":\"Password123\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daniel"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Draper"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password123"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-user">Get User</h1>
+<h2 id="get-user">Get User</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/user"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -194,7 +207,9 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-business">Create Business</h1>
+<h1 id="businesses">Businesses</h1>
+
+<h2 id="create-business">Create Business</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -224,12 +239,25 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"registered_name\":\"Tappr Pty Ltd\",\"phone_number\":\"0732457832\",\"address\":{\"line1\":\"Level 2, 1062 Ann Street\",\"city\":\"Fortitude Valley\",\"state\":\"Queensland\",\"postcode\":\"4006\",\"country_code\":\"AU\"},\"mcc\":\"4100\",\"currency_code\":\"AUD\",\"timezone\":\"Australia/Brisbane\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"registered_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr Pty Ltd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0732457832"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Level 2, 1062 Ann Street"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Queensland"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"mcc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4100"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-business">Get Business</h1>
+<h2 id="get-business">Get Business</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -244,7 +272,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-business">Update Business</h1>
+<h2 id="update-business">Update Business</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -275,11 +303,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"use_trading_name\":true,\"trading_name\":\"Tappr\"}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"use_trading_name"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"trading_name"</span><span class="p">:</span><span class="s2">"Tappr"</span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-businesses">Get Businesses</h1>
+<h2 id="get-businesses">Get Businesses</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -294,7 +322,9 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-fees">Create Fees</h1>
+<h1 id="fees">Fees</h1>
+
+<h2 id="create-fees">Create Fees</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -324,12 +354,23 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"GST\",\"status\":\"ACTIVE\",\"apply_to_custom_amount\":true,\"fee_type\":\"GOVERNMENT\",\"inclusion_type\":\"ADDITIVE\",\"calculation_phase\":\"TOTAL\",\"amount\":{\"minor_units\":10,\"currency_code\":\"AUD\"}}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GST"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"apply_to_custom_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"fee_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOVERNMENT"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"inclusion_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADDITIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"calculation_phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOTAL"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-fee">Get Fee</h1>
+<h2 id="get-fee">Get Fee</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees/730f43f0-c76e-4d87-b1f9-5a8a2106528d"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -360,11 +401,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-fees">Update Fees</h1>
+<h2 id="update-fees">Update Fees</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees/730f43f0-c76e-4d87-b1f9-5a8a2106528d"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -394,12 +435,15 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Goods and Services Tax (GST)\",\"rate\":0.1}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goods and Services Tax (GST)"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-fees">Get Fees</h1>
+<h2 id="get-fees">Get Fees</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -430,11 +474,13 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-order-modifiers">Create Order Modifiers</h1>
+<h1 id="order-modifiers">Order Modifiers</h1>
+
+<h2 id="create-order-modifiers">Create Order Modifiers</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -464,12 +510,26 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Milk\",\"min_selection\":\"1\",\"max_selection\":\"1\",\"status\":\"ACTIVE\",\"options\":[{\"name\":\"Full Cream\",\"is_default\":true,\"status\":\"ACTIVE\",\"amount\":{\"minor_units\":100,\"currency_code\":\"AUD\"}}]}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Milk"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"min_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"max_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full Cream"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-order-modifiers">Update Order Modifiers</h1>
+<h2 id="update-order-modifiers">Update Order Modifiers</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers/35cc18bc-d35b-4fc5-ab30-00b81f888925"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -499,12 +559,18 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Mulk\",\"options\":[{\"id\":\"01f872ad-528b-4b7b-8183-1fb3fe619c0e\",\"name\":\"Cow Juice\"}]}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mulk"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01f872ad-528b-4b7b-8183-1fb3fe619c0e"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cow Juice"</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-modifier">Get Modifier</h1>
+<h2 id="get-modifier">Get Modifier</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers/35cc18bc-d35b-4fc5-ab30-00b81f888925"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -535,11 +601,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-modifiers">Get Modifiers</h1>
+<h2 id="get-modifiers">Get Modifiers</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -570,11 +636,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="delete-modifier">Delete Modifier</h1>
+<h2 id="delete-modifier">Delete Modifier</h2>
 <pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers/48a36d70-2f50-4121-9c85-9de756cbda28"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -605,11 +671,13 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-categories">Create Categories</h1>
+<h1 id="categories">Categories</h1>
+
+<h2 id="create-categories">Create Categories</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -639,12 +707,14 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Beverages\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beverages"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-category">Get Category</h1>
+<h2 id="get-category">Get Category</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories/969b96b0-7686-424a-8678-ab024c923b8b"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -659,7 +729,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-category">Update Category</h1>
+<h2 id="update-category">Update Category</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories/0afa10da-d961-4a90-be6e-6bac4ce1cb2b"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -689,12 +759,14 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Drinks\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drinks"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="delete-category">Delete Category</h1>
+<h2 id="delete-category">Delete Category</h2>
 <pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories/0afa10da-d961-4a90-be6e-6bac4ce1cb2b"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -725,11 +797,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-categories">Get Categories</h1>
+<h2 id="get-categories">Get Categories</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -744,7 +816,9 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-products">Get Products</h1>
+<h1 id="products">Products</h1>
+
+<h2 id="get-products">Get Products</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -759,7 +833,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-product">Create Product</h1>
+<h2 id="create-product">Create Product</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -789,12 +863,38 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Bondi Chai Latt\\u00e8\",\"description\":\"Bondi Chai is the Gold Standard in chai latte. A silk-smooth creaminess and 'almost addictive' tastemake Bondi Chai one of Australia's favourite drinks, enhancing the best moments of every day.\",\"variants\":[{\"name\":\"Small\",\"sku\":\"CHAI-SM-0001\",\"amount\":{\"minor_units\":200,\"currency_code\":\"AUD\"}},{\"name\":\"Medium\",\"sku\":\"CHAI-MD-0001\",\"amount\":{\"minor_units\":300,\"currency_code\":\"AUD\"}},{\"name\":\"Large\",\"sku\":\"CHAI-LG-0001\",\"amount\":{\"minor_units\":400,\"currency_code\":\"AUD\"}}],\"category_ids\":[\"0e12eebf-ab9c-4caa-974b-0218c19184f0\"]}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bondi Chai Latt\\u00e8"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bondi Chai is the Gold Standard in chai latte. A silk-smooth creaminess and 'almost addictive' tastemake Bondi Chai one of Australia's favourite drinks, enhancing the best moments of every day."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variants"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Small"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHAI-SM-0001"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHAI-MD-0001"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHAI-LG-0001"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}],</span><span class="w">
+        </span><span class="nt">"category_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"0e12eebf-ab9c-4caa-974b-0218c19184f0"</span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-product">Update Product</h1>
+<h2 id="update-product">Update Product</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products/0cbe4b7f-4ec4-4eda-92c8-0f42119c03e1"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -824,12 +924,15 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Latt\\u00e8\",\"description\":\"A silk-smooth creaminess and 'almost addictive' tastemake chai one of Australia's favourite drinks, enhancing the best moments of every day.\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Latt\\u00e8"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A silk-smooth creaminess and 'almost addictive' tastemake chai one of Australia's favourite drinks, enhancing the best moments of every day."</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-product">Get Product</h1>
+<h2 id="get-product">Get Product</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products/0cbe4b7f-4ec4-4eda-92c8-0f42119c03e1"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -860,11 +963,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="delete-product">Delete Product</h1>
+<h2 id="delete-product">Delete Product</h2>
 <pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products/0cbe4b7f-4ec4-4eda-92c8-0f42119c03e1"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -895,11 +998,13 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-business-locations">Get Business Locations</h1>
+<h1 id="business-locations">Business Locations</h1>
+
+<h2 id="get-business-locations">Get Business Locations</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -914,7 +1019,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-business-location">Get Business Location</h1>
+<h2 id="get-business-location">Get Business Location</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations/6f161162-b3a5-446e-b5ed-de9ca93fe003"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -929,7 +1034,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-business-locatoion">Update Business Locatoion</h1>
+<h2 id="update-business-locatoion">Update Business Locatoion</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations/6f161162-b3a5-446e-b5ed-de9ca93fe003"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -959,12 +1064,14 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Tappr HQ\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr HQ"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-business-location">Create Business Location</h1>
+<h2 id="create-business-location">Create Business Location</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -994,12 +1101,28 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Tappr\",\"phone_number\":\"0732457856\",\"status\":\"ACTIVE\",\"address\":{\"line1\":\"Level 2, 1062 Ann Street\",\"city\":\"Fortitude Valley\",\"state\":\"Queensland\",\"postcode\":\"4006\",\"country_code\":\"AU\",\"coordinates_resolved\":false,\"address_resolved\":false},\"timezone\":\"Australia/Brisbane\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0732457856"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Level 2, 1062 Ann Street"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Queensland"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"coordinates_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"address_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-discount">Create Discount</h1>
+<h1 id="discounts">Discounts</h1>
+
+<h2 id="create-discount">Create Discount</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1029,12 +1152,17 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Emergency Services Discount\",\"description\":\"This discount can be applied to emergency services personnel.\",\"status\":\"ACTIVE\",\"rate\":\"0.20\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emergency Services Discount"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This discount can be applied to emergency services personnel."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.20"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-discount">Get Discount</h1>
+<h2 id="get-discount">Get Discount</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts/79a2477e-dda8-421f-b2ad-d2a67c6d21b8"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1065,11 +1193,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-discounts">Get Discounts</h1>
+<h2 id="get-discounts">Get Discounts</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1100,11 +1228,11 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="update-discount">Update Discount</h1>
+<h2 id="update-discount">Update Discount</h2>
 <pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts/79a2477e-dda8-421f-b2ad-d2a67c6d21b8"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1134,12 +1262,18 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"name\":\"Emergency Responder Discount\",\"amount\":{\"minor_units\":100,\"currency_code\":\"AUD\"}}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emergency Responder Discount"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="delete-discount">Delete Discount</h1>
+<h2 id="delete-discount">Delete Discount</h2>
 <pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts/79a2477e-dda8-421f-b2ad-d2a67c6d21b8"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1170,11 +1304,13 @@
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
   </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="w">
+  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="get-orders">Get Orders</h1>
+<h1 id="orders">Orders</h1>
+
+<h2 id="get-orders">Get Orders</h2>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/locations/d3a893ac-6724-457c-8770-1a8b48748880/orders"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
 </code></pre>
@@ -1189,7 +1325,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-order">Create Order</h1>
+<h2 id="create-order">Create Order</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/locations/d3a893ac-6724-457c-8770-1a8b48748880/orders"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1219,12 +1355,112 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"status\":\"OPEN\",\"reference\":\"\",\"reference_source\":\"Tappr\",\"opened_at\":\"1476077339\",\"opened_by\":\"e04f9573-4a63-41aa-95f1-a3e224e14384\",\"items\":[{\"type\":\"CUSTOM\",\"name\":\"Custom\",\"quantity\":2,\"price\":{\"minor_units\":2000,\"currency_code\":\"AUD\"},\"total\":{\"minor_units\":4000,\"currency_code\":\"AUD\"}},{\"type\":\"PRODUCT\",\"name\":\"Latt\\u00e8\",\"variant_name\":\"Large\",\"source\":\"Tappr\",\"product_reference\":\"\",\"variant_reference\":\"\",\"quantity\":2,\"price\":{\"minor_units\":450,\"currency_code\":\"AUD\"},\"total\":{\"minor_units\":1030,\"currency_code\":\"AUD\"},\"modifiers\":[{\"reference\":\"\",\"name\":\"Milk\",\"total\":{\"minor_units\":30,\"currency_code\":\"AUD\"},\"options\":[{\"reference\":\"\",\"name\":\"Soy\",\"quantity\":1,\"price\":{\"minor_units\":30,\"currency_code\":\"AUD\"},\"total\":{\"minor_units\":30,\"currency_code\":\"AUD\"}}]},{\"reference\":\"\",\"name\":\"Syrup\",\"total\":{\"minor_units\":100,\"currency_code\":\"AUD\"},\"options\":[{\"reference\":\"\",\"name\":\"Caramel\",\"quantity\":2,\"price\":{\"minor_units\":50,\"currency_code\":\"AUD\"},\"total\":{\"minor_units\":100,\"currency_code\":\"AUD\"}}]}]}],\"total\":{\"minor_units\":850,\"currency_code\":\"AUD\"},\"tenders\":[{\"device_id\":\"\",\"employee_id\":\"e04f9573-4a63-41aa-95f1-a3e224e14384\",\"payment_type\":\"CASH\",\"amount\":{\"minor_units\":1000,\"currency_code\":\"AUD\"},\"tendered\":{\"minor_units\":1000,\"currency_code\":\"AUD\"},\"change\":{\"minor_units\":0,\"currency_code\":\"AUD\"},\"reference\":\"\"}]}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reference_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opened_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1476077339"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opened_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e04f9573-4a63-41aa-95f1-a3e224e14384"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CUSTOM"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRODUCT"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Latt\\u00e8"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"variant_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"product_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"variant_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">1030</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"modifiers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Milk"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                    </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soy"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}]</span><span class="w">
+            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syrup"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+                    </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caramel"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+                    </span><span class="p">},</span><span class="w">
+                    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}]</span><span class="w">
+            </span><span class="p">}]</span><span class="w">
+        </span><span class="p">}],</span><span class="w">
+        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">850</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"tenders"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"device_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"employee_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e04f9573-4a63-41aa-95f1-a3e224e14384"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CASH"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"tendered"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"change"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+        </span><span class="p">}]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h1 id="create-reciept">Create Reciept</h1>
+<h1 id="receipts">Receipts</h1>
+
+<h2 id="create-reciept">Create Reciept</h2>
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/locations/d3a893ac-6724-457c-8770-1a8b48748880/orders/f99e75cf-0be6-42ed-8246-b55aa894f7a8/tenders/9f912329-0416-4d20-acab-dbf33f32a8a9/receipts"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
     -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
@@ -1254,8 +1490,11 @@
 - <strong>body</strong> should respect the following schema:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{\"method\":\"EMAIL\",\"destination\":\"daniel@mytappr.com\"}"</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMAIL"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 

@@ -1,9 +1,6 @@
 # Errors
 
-
-
 The API uses the following error codes:
-
 
 Error Code | Meaning
 ---------- | -------

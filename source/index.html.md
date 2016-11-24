@@ -11,6 +11,9 @@ toc_footers:
 includes:
   - authorization
   - user
+  - order
+  - tender
+  - product
 
 search: true
 ---

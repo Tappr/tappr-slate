@@ -3,7 +3,41 @@
 
 ## Tender Create
 
-`TODO`
+> Request
+
+```shell
+# curl -X POST "https://api.tappr.io/locations/:location_id/orders/:order_id/tenders" \
+    -H "Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+    -d '{
+            "amount": {
+                "currency_code": "AUD",
+                "minor_units": 500
+            },
+            "change": {
+                "currency_code": "AUD",
+                "minor_units": 0
+            },
+            "device_id": "CAF1E353-EBB9-4209-A7EF-E5BF0815B7DA",
+            "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
+            "payment_type": "CASH",
+            "reference": "6978D003-C98B-424F-9DC3-66D0F86D356E",
+            "tendered": {
+                "currency_code": "AUD",
+                "minor_units": 0
+            }
+        }'
+
+```
+
+### Fields
+
+| Field              | Note       | Description                                                            |
+|:-------------------|:-----------|:-----------------------------------------------------------------------|
+| `amount`           |            | The amount given                                                       |
+| `tendered`         |            | The amount taken (typically equivalent to amount for non cash tenders) |
+| `change`           |            | The amount returned (typically zero for non cash tenders)              |
+| `reference`        | `Optional` | An arbitrary id provided by the payment provider                       |
+| `reference_source` | `Optional` | The source that provided the reference                                 |
 
 ## Get all Tenders
 
@@ -41,36 +75,6 @@ curl -X GET "https://api.tappr.io/locations/:location_id/orders/:order_id/tender
             "minor_units": 0
         },
         "updated_at": 1479433994
-    },
-    {
-        "amount": {
-            "currency_code": "AUD",
-            "minor_units": 255
-        },
-        "change": {
-            "currency_code": "AUD",
-            "minor_units": 0
-        },
-        "created_at": 1479343234,
-        "device_id": "caf1e353-ebb9-4209-a7ef-e5bf0815b7da",
-        "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
-        "id": "cd95e502-ade4-4f5e-90b2-e63d97fe5067",
-        "location_id": "711f4255-8d64-4ea9-993b-7e1fdf0971bb",
-        "metadata": "{}",
-        "order_id": "d0dda653-a334-4a48-b08b-ff824315882d",
-        "payment_type": "CASH",
-        "reference": "06F43485-9032-4ADE-9686-B9C433FBAD27",
-        "tendered": {
-            "currency_code": "AUD",
-            "minor_units": 0
-        },
-        "updated_at": 1479343234
     }
 ]
 ```
-
-## Fields
-
-| Field           | Description                                  |
-|:----------------|:---------------------------------------------|
-| `configuration` | Used to synchronize client specific settings |

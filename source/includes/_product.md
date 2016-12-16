@@ -1,16 +1,49 @@
 
 # Products
 
-## Order Create
+### Variants
 
-`TODO`
+Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.
+
+Typically this would be different sizes of the same product.
+
+## Product Create
+
+> Request
+
+```shell
+curl -X POST "https://api.tappr.io/businesses/:business_id/products" \
+    -H "Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
+    -d '{
+            "name": "Snapper",
+            "variants": [
+                {
+                    "amount": {
+                        "currency_code": "AUD",
+                        "minor_units": 19999
+                    },
+                    "configuration": {},
+                    "created_at": 1479344701,
+                    "id": "730ebb67-9ec5-4013-898d-71a52ca780eb",
+                    "updated_at": 1479344701
+                }
+            ]
+        }'
+```
+
+### Fields
+
+| Field      | Requirements |
+|:-----------|:-------------|
+| `variants` | `count > 0`  |
+
 
 ## Get all Products
 
 > Request
 
 ```shell
-curl -X GET "https://api.tappr.io/locations/:lid/orders" \
+curl -X GET "https://api.tappr.io/businesses/:business_id/products" \
     -H "Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
 ```
 
@@ -41,9 +74,3 @@ curl -X GET "https://api.tappr.io/locations/:lid/orders" \
     }
 ]
 ```
-
-## Variants
-
-Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.
-
-Typically this would be different sizes of the same product.

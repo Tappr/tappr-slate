@@ -1,6 +1,12 @@
 
 # Authentication
 
+### Fields
+
+| Field       | Description                                                                   |
+|:------------|:------------------------------------------------------------------------------|
+| `client_id` | Issued to you when you register your application through `developer.tappr.io` |
+
 ## Password Authentication
 
 > Request
@@ -51,9 +57,3 @@ curl -X POST https://api.tappr.io/v1/authenticate \
 ```
 
 When you receive an Access Token from the API through the `/authenticate` endpoint, you also receive a _Refresh Token_. This token may be used so continue your users session without prompting for their password again.
-
-## Fields
-
-| Field       | Description                                                                 |
-|:------------|:----------------------------------------------------------------------------|
-| `client_id` | Issued to you when you register your application through developer.tappr.io |

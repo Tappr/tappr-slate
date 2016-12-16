@@ -1,9 +1,25 @@
 
 # Users
 
+### Fields
+
+| Field           | Description                                  |
+|:----------------|:---------------------------------------------|
+| `configuration` | Used to synchronize client specific settings |
+
 ## User Create
 
-`TODO`
+> Request
+
+```shell
+curl -X POST "https://api.tappr.io/user" \
+    -d '{
+            "email": "user@example.com",
+            "first_name": "John",
+            "last_name": "Smith",
+            "pin": "1387"
+        }'
+```
 
 ## User Get
 
@@ -20,7 +36,7 @@ curl -X GET "https://api.tappr.io/user" \
 {
     "configuration": {},
     "created_at": 1479257221,
-    "email": "developer@tappr.io",
+    "email": "example@tappr.io",
     "employments": [
         {
             "business": {
@@ -54,7 +70,7 @@ curl -X GET "https://api.tappr.io/user" \
                 "use_trading_name": true
             },
             "created_at": 1479257221,
-            "email": "developer@tappr.io",
+            "email": "example@tappr.io",
             "first_name": "Tappr",
             "id": "6c46a5fc-a41e-41b2-9fb3-9827162c4254",
             "last_name": "Developer",
@@ -67,12 +83,6 @@ curl -X GET "https://api.tappr.io/user" \
     "last_name": "Developer",
     "pin": "1111",
     "updated_at": 1479878939,
-    "username": "developer@tappr.io"
+    "username": "example@tappr.io"
 }
 ```
-
-## Fields
-
-| Field           | Description                                  |
-|:----------------|:---------------------------------------------|
-| `configuration` | Used to synchronize client specific settings |

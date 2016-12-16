@@ -14,6 +14,10 @@ includes:
   - order
   - tender
   - product
+  - fee
+  - discount
+  - business
+  - location
 
 search: true
 ---

@@ -3,7 +3,72 @@
 
 ## Order Create
 
-`TODO`
+### Fields
+
+| Field              | Note       | Description                                                 |
+|:-------------------|:-----------|:------------------------------------------------------------|
+| `items`            |            | This field represents the goods provided through this order |
+| `status`           | `Required` | [`OPEN` | `COMPLETED` | `VOIDED`]                           |
+| `total`            | `Required` | This field *must* be the total displayed to a customer      |
+| `opened_at`        | `Required` | The epoch timestamp the order was created at                |
+| `opened_by`        | `Required` | The ID of the User that created the order                   |
+| `reference`        | `Required` | An arbitrary id provided by the payment provider            |
+| `reference_source` | `Required` | The source that provided the reference                      |
+
+> Request
+
+```shell
+curl -X POST "https://api.tappr.io/locations/:location_id/orders" \
+    -H "Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ" \
+    -d '{
+            "items": [
+                {
+                    "discounts": [],
+                    "fees": [],
+                    "name": "Custom",
+                    "price": {
+                        "currency_code": "AUD",
+                        "minor_units": 500
+                    },
+                    "quantity": 1.0,
+                    "total": {
+                        "currency_code": "AUD",
+                        "minor_units": 500
+                    },
+                    "type": "CUSTOM"
+                }
+            ],
+            "opened_at": 1481844679.02264,
+            "opened_by": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
+            "reference": "EC6D6350-E7CB-4169-AA24-1009D4ED4363",
+            "reference_source": "TAPPR",
+            "status": "COMPLETED",
+            "tenders": [
+                {
+                    "amount": {
+                        "currency_code": "AUD",
+                        "minor_units": 500
+                    },
+                    "change": {
+                        "currency_code": "AUD",
+                        "minor_units": 0
+                    },
+                    "device_id": "CAF1E353-EBB9-4209-A7EF-E5BF0815B7DA",
+                    "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
+                    "payment_type": "CASH",
+                    "reference": "6978D003-C98B-424F-9DC3-66D0F86D356E",
+                    "tendered": {
+                        "currency_code": "AUD",
+                        "minor_units": 0
+                    }
+                }
+            ],
+            "total": {
+                "currency_code": "AUD",
+                "minor_units": 500
+            }
+        }'
+```
 
 ## Get all Orders
 
@@ -22,36 +87,6 @@ curl -X GET "https://api.tappr.io/locations/:lid/orders" \
         "created_at": 1479433994,
         "id": "c953f762-112b-435a-b67d-9f5e2d0b8258",
         "items": [
-            {
-                "created_at": 1479433994,
-                "name": "Custom",
-                "price": {
-                    "currency_code": "AUD",
-                    "minor_units": 3500
-                },
-                "quantity": 1.0,
-                "total": {
-                    "currency_code": "AUD",
-                    "minor_units": 3500
-                },
-                "type": "CUSTOM",
-                "updated_at": 1479433994
-            },
-            {
-                "created_at": 1479433994,
-                "name": "Custom",
-                "price": {
-                    "currency_code": "AUD",
-                    "minor_units": 2500
-                },
-                "quantity": 1.0,
-                "total": {
-                    "currency_code": "AUD",
-                    "minor_units": 2500
-                },
-                "type": "CUSTOM",
-                "updated_at": 1479433994
-            },
             {
                 "created_at": 1479433994,
                 "name": "Custom",
@@ -78,7 +113,7 @@ curl -X GET "https://api.tappr.io/locations/:lid/orders" \
             {
                 "amount": {
                     "currency_code": "AUD",
-                    "minor_units": 10000
+                    "minor_units": 4000
                 },
                 "change": {
                     "currency_code": "AUD",
@@ -102,138 +137,12 @@ curl -X GET "https://api.tappr.io/locations/:lid/orders" \
         ],
         "total": {
             "currency_code": "AUD",
-            "minor_units": 10000
+            "minor_units": 4000
         },
         "updated_at": 1479433994
-    },
-    {
-        "created_at": 1479688490,
-        "id": "4407b4de-3067-4804-b2a2-ab5d6970cabb",
-        "items": [
-            {
-                "created_at": 1479688490,
-                "name": "Red Herring",
-                "price": {
-                    "currency_code": "AUD",
-                    "minor_units": 19999
-                },
-                "product_reference": "",
-                "quantity": 1.0,
-                "source": "TAPPR",
-                "total": {
-                    "currency_code": "AUD",
-                    "minor_units": 19999
-                },
-                "type": "PRODUCT",
-                "updated_at": 1479688490,
-                "variant_reference": ""
-            }
-        ],
-        "location_id": "711f4255-8d64-4ea9-993b-7e1fdf0971bb",
-        "opened_at": "2016-11-21T00:34:07.000Z",
-        "opened_by": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
-        "reference": "0251095A-BD80-41ED-AD14-1743134696EA",
-        "reference_source": "TAPPR",
-        "status": "COMPLETED",
-        "tenders": [
-            {
-                "amount": {
-                    "currency_code": "AUD",
-                    "minor_units": 19999
-                },
-                "change": {
-                    "currency_code": "AUD",
-                    "minor_units": 0
-                },
-                "created_at": 1479688490,
-                "device_id": "caf1e353-ebb9-4209-a7ef-e5bf0815b7da",
-                "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
-                "id": "533c843e-4558-4986-9c0a-e50be042afe8",
-                "location_id": "711f4255-8d64-4ea9-993b-7e1fdf0971bb",
-                "metadata": "{}",
-                "order_id": "4407b4de-3067-4804-b2a2-ab5d6970cabb",
-                "payment_type": "CASH",
-                "reference": "4E0842D6-60F5-4D12-A09B-7A4046433A58",
-                "tendered": {
-                    "currency_code": "AUD",
-                    "minor_units": 0
-                },
-                "updated_at": 1479688490
-            }
-        ],
-        "total": {
-            "currency_code": "AUD",
-            "minor_units": 19999
-        },
-        "updated_at": 1479688490
-    },
-    {
-        "created_at": 1479343234,
-        "id": "d0dda653-a334-4a48-b08b-ff824315882d",
-        "items": [
-            {
-                "created_at": 1479343234,
-                "name": "Custom",
-                "price": {
-                    "currency_code": "AUD",
-                    "minor_units": 255
-                },
-                "quantity": 1.0,
-                "total": {
-                    "currency_code": "AUD",
-                    "minor_units": 255
-                },
-                "type": "CUSTOM",
-                "updated_at": 1479343234
-            }
-        ],
-        "location_id": "711f4255-8d64-4ea9-993b-7e1fdf0971bb",
-        "opened_at": "2016-11-17T00:40:29.000Z",
-        "opened_by": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
-        "reference": "04C1586B-4327-46C3-9E56-1D0ECD01BC59",
-        "reference_source": "TAPPR",
-        "status": "COMPLETED",
-        "tenders": [
-            {
-                "amount": {
-                    "currency_code": "AUD",
-                    "minor_units": 255
-                },
-                "change": {
-                    "currency_code": "AUD",
-                    "minor_units": 0
-                },
-                "created_at": 1479343234,
-                "device_id": "caf1e353-ebb9-4209-a7ef-e5bf0815b7da",
-                "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
-                "id": "cd95e502-ade4-4f5e-90b2-e63d97fe5067",
-                "location_id": "711f4255-8d64-4ea9-993b-7e1fdf0971bb",
-                "metadata": "{}",
-                "order_id": "d0dda653-a334-4a48-b08b-ff824315882d",
-                "payment_type": "CASH",
-                "reference": "06F43485-9032-4ADE-9686-B9C433FBAD27",
-                "tendered": {
-                    "currency_code": "AUD",
-                    "minor_units": 0
-                },
-                "updated_at": 1479343234
-            }
-        ],
-        "total": {
-            "currency_code": "AUD",
-            "minor_units": 255
-        },
-        "updated_at": 1479343234
     }
 ]
 ```
-
-## Fields
-
-| Field         | Description                             |
-|:--------------|:----------------------------------------|
-| `order_items` | The items included in this order        |
-| `tenders`     | The tenders recorded against this order |
 
 ## OrderItems
 

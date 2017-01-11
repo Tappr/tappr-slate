@@ -14,11 +14,11 @@
   background-color: #272822;
 }
 .highlight .err {
-  color: #151515;
-  background-color: #ac4142;
+  color: #272822;
+  background-color: #f92672;
 }
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #505050;
+  color: #75715e;
 }
 .highlight .cp {
   color: #f4bf75;
@@ -27,45 +27,45 @@
   color: #f4bf75;
 }
 .highlight .o, .highlight .ow {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .p, .highlight .pi {
-  color: #d0d0d0;
+  color: #f8f8f2;
 }
 .highlight .gi {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .gd {
-  color: #ac4142;
+  color: #f92672;
 }
 .highlight .gh {
-  color: #6a9fb5;
-  background-color: #151515;
+  color: #66d9ef;
+  background-color: #272822;
   font-weight: bold;
 }
 .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #aa759f;
+  color: #ae81ff;
 }
 .highlight .kc {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kt {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .kd {
-  color: #d28445;
+  color: #fd971f;
 }
 .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .sr {
-  color: #75b5aa;
+  color: #a1efe4;
 }
 .highlight .si {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .se {
-  color: #8f5536;
+  color: #cc6633;
 }
 .highlight .nn {
   color: #f4bf75;
@@ -77,13 +77,13 @@
   color: #f4bf75;
 }
 .highlight .na {
-  color: #6a9fb5;
+  color: #66d9ef;
 }
 .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #90a959;
+  color: #a6e22e;
 }
 .highlight .ss {
-  color: #90a959;
+  color: #a6e22e;
 }
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
@@ -95,11 +95,11 @@
     <a href="#" id="nav-button">
       <span>
         NAV
-        <img src="images/navbar.png" />
+        <img src="images/navbar.png" alt="Navbar" />
       </span>
     </a>
     <div class="tocify-wrapper">
-      <img src="images/logo.png" />
+      <img src="images/logo.png" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
         </div>
@@ -121,1439 +121,726 @@
 
 <aside class="notice">Tappr API doc. This is a WORKING copy and will change.</aside>
 
-<h1 id="authentication">Authentication</h1>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/authenticate"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
+<p>Welcome to the Tappr API! You can use our API to access Tappr API endpoints.</p>
+
+<p>You can view code examples in the dark area to the right.</p>
+
+          <h1 id="authentication">Authentication</h1>
+
+<h2 id="password-authentication">Password Authentication</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.tappr.io/v1/authenticate <span class="se">\</span>
+  -H <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+        "client_id": "7ea20b0c-d163-4f4d-9fc5-62d56a151988",
+        "grant_type": "password",
+        "username": "john@example.com",
+        "password": "wre2H2odwT96wactnn"
+      }'</span>
 </code></pre>
-
 <blockquote>
-<p>Header Parameters
-- <strong>Content-Type</strong> should respect the following schema:</p>
+<p>Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
+    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a171ab16c270a86be0dea1dcd2f36b0a"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"client_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e6ebd1e-1c5e-4db8-a6be-6379c8d99f17"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"grant_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"password"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password123"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="users">Users</h1>
-
-<h2 id="user-create">User Create</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/user"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Content-Type</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Daniel"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Draper"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Password123"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-user">Get User</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/user"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="businesses">Businesses</h1>
-
-<h2 id="create-business">Create Business</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"registered_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr Pty Ltd"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0732457832"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Level 2, 1062 Ann Street"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Queensland"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"mcc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4100"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-business">Get Business</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-business">Update Business</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">"use_trading_name"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"trading_name"</span><span class="p">:</span><span class="s2">"Tappr"</span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-businesses">Get Businesses</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="fees">Fees</h1>
-
-<h2 id="create-fees">Create Fees</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GST"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"apply_to_custom_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"fee_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GOVERNMENT"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"inclusion_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ADDITIVE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"calculation_phase"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TOTAL"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-fee">Get Fee</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees/730f43f0-c76e-4d87-b1f9-5a8a2106528d"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-fees">Update Fees</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees/730f43f0-c76e-4d87-b1f9-5a8a2106528d"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Goods and Services Tax (GST)"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.1</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-fees">Get Fees</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/fees"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="order-modifiers">Order Modifiers</h1>
-
-<h2 id="create-order-modifiers">Create Order Modifiers</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Milk"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"min_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"max_selection"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Full Cream"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"is_default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-order-modifiers">Update Order Modifiers</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers/35cc18bc-d35b-4fc5-ab30-00b81f888925"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mulk"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"01f872ad-528b-4b7b-8183-1fb3fe619c0e"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cow Juice"</span><span class="w">
-        </span><span class="p">}]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-modifier">Get Modifier</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers/35cc18bc-d35b-4fc5-ab30-00b81f888925"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-modifiers">Get Modifiers</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="delete-modifier">Delete Modifier</h2>
-<pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/modifiers/48a36d70-2f50-4121-9c85-9de756cbda28"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="categories">Categories</h1>
-
-<h2 id="create-categories">Create Categories</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Beverages"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-category">Get Category</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories/969b96b0-7686-424a-8678-ab024c923b8b"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-category">Update Category</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories/0afa10da-d961-4a90-be6e-6bac4ce1cb2b"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Drinks"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="delete-category">Delete Category</h2>
-<pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories/0afa10da-d961-4a90-be6e-6bac4ce1cb2b"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-categories">Get Categories</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/categories"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="products">Products</h1>
-
-<h2 id="get-products">Get Products</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="create-product">Create Product</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bondi Chai Latt\\u00e8"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bondi Chai is the Gold Standard in chai latte. A silk-smooth creaminess and 'almost addictive' tastemake Bondi Chai one of Australia's favourite drinks, enhancing the best moments of every day."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"variants"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Small"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHAI-SM-0001"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Medium"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHAI-MD-0001"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CHAI-LG-0001"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}],</span><span class="w">
-        </span><span class="nt">"category_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"0e12eebf-ab9c-4caa-974b-0218c19184f0"</span><span class="p">]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-product">Update Product</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products/0cbe4b7f-4ec4-4eda-92c8-0f42119c03e1"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Latt\\u00e8"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A silk-smooth creaminess and 'almost addictive' tastemake chai one of Australia's favourite drinks, enhancing the best moments of every day."</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-product">Get Product</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products/0cbe4b7f-4ec4-4eda-92c8-0f42119c03e1"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="delete-product">Delete Product</h2>
-<pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/products/0cbe4b7f-4ec4-4eda-92c8-0f42119c03e1"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="business-locations">Business Locations</h1>
-
-<h2 id="get-business-locations">Get Business Locations</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-business-location">Get Business Location</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations/6f161162-b3a5-446e-b5ed-de9ca93fe003"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-business-locatoion">Update Business Locatoion</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations/6f161162-b3a5-446e-b5ed-de9ca93fe003"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr HQ"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="create-business-location">Create Business Location</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/locations"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0732457856"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Level 2, 1062 Ann Street"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Queensland"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AU"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"coordinates_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"address_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="discounts">Discounts</h1>
-
-<h2 id="create-discount">Create Discount</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emergency Services Discount"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This discount can be applied to emergency services personnel."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"rate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.20"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-discount">Get Discount</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts/79a2477e-dda8-421f-b2ad-d2a67c6d21b8"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="get-discounts">Get Discounts</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="update-discount">Update Discount</h2>
-<pre class="highlight shell"><code>curl -X PUT <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts/79a2477e-dda8-421f-b2ad-d2a67c6d21b8"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Emergency Responder Discount"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="delete-discount">Delete Discount</h2>
-<pre class="highlight shell"><code>curl -X DELETE <span class="s2">"http://localhost:3000/v1/businesses/0d36feb6-ced5-4f03-97ad-209763150304/discounts/79a2477e-dda8-421f-b2ad-d2a67c6d21b8"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="orders">Orders</h1>
-
-<h2 id="get-orders">Get Orders</h2>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"http://localhost:3000/v1/locations/d3a893ac-6724-457c-8770-1a8b48748880/orders"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h2 id="create-order">Create Order</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/locations/d3a893ac-6724-457c-8770-1a8b48748880/orders"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OPEN"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"reference_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"opened_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1476077339"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"opened_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e04f9573-4a63-41aa-95f1-a3e224e14384"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CUSTOM"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRODUCT"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Latt\\u00e8"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"variant_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Large"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"product_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"variant_reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">450</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">1030</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"modifiers"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-                </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Milk"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-                    </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Soy"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">}]</span><span class="w">
-            </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Syrup"</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-                </span><span class="p">},</span><span class="w">
-                </span><span class="nt">"options"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-                    </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Caramel"</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-                    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-                    </span><span class="p">},</span><span class="w">
-                    </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-                        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-                    </span><span class="p">}</span><span class="w">
-                </span><span class="p">}]</span><span class="w">
-            </span><span class="p">}]</span><span class="w">
-        </span><span class="p">}],</span><span class="w">
-        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">850</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"tenders"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
-            </span><span class="nt">"device_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"employee_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"e04f9573-4a63-41aa-95f1-a3e224e14384"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CASH"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"tendered"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"change"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="w">
-            </span><span class="p">},</span><span class="w">
-            </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
-        </span><span class="p">}]</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<h1 id="receipts">Receipts</h1>
-
-<h2 id="create-reciept">Create Reciept</h2>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"http://localhost:3000/v1/locations/d3a893ac-6724-457c-8770-1a8b48748880/orders/f99e75cf-0be6-42ed-8246-b55aa894f7a8/tenders/9f912329-0416-4d20-acab-dbf33f32a8a9/receipts"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: </span><span class="nv">$Authorization</span><span class="s2">"</span> <span class="se">\</span>
-    -H <span class="s2">"Content-Type: application/json; charset=utf-8"</span> <span class="se">\</span>
-    --data-raw <span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
-</code></pre>
-
-<blockquote>
-<p>Header Parameters
-- <strong>Authorization</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Token "</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"enum"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-  </span><span class="p">],</span><span class="w">
-  </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="s2">"application/json; charset=utf-8"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p>Body Parameters
-- <strong>body</strong> should respect the following schema:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"method"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EMAIL"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"destination"</span><span class="p">:</span><span class="w"> </span><span class="s2">"daniel@mytappr.com"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-          <h1 id="errors">Errors</h1>
-
-<p>The API uses the following error codes:</p>
+<p>Tappr&rsquo;s API expects an active API token to be included in request all authorized endpoints.</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td style="text-align: left"><code class="prettyprint">client_id</code>   <em>REQUIRED</em></td>
+<td style="text-align: left">Issued to you when you register your application through <code class="prettyprint">developer.tappr.io</code></td>
 </tr>
 <tr>
-<td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td style="text-align: left"><code class="prettyprint">grant_type</code>  <em>REQUIRED</em></td>
+<td style="text-align: left">Should be <code class="prettyprint">password</code>, other grant type is <code class="prettyprint">refresh_token</code></td>
 </tr>
 <tr>
-<td>403</td>
-<td>Forbidden &ndash; The requested is hidden for administrators only</td>
+<td style="text-align: left"><code class="prettyprint">username</code>    <em>REQUIRED</em></td>
+<td style="text-align: left">user name of Tappr</td>
 </tr>
 <tr>
-<td>404</td>
-<td>Not Found &ndash; The specified item could not be found</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed &ndash; You tried to access with an invalid method</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone &ndash; The item requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many items! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td style="text-align: left"><code class="prettyprint">password</code>    <em>REQUIRED</em></td>
+<td style="text-align: left">password of Tappr</td>
 </tr>
 </tbody></table>
 
+<h2 id="refreshing-authentication">Refreshing Authentication</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.tappr.io/v1/authenticate <span class="se">\</span>
+  -H <span class="s2">"application/json"</span> <span class="se">\</span>
+  -d <span class="s1">'{
+        "client_id": "7ea20b0c-d163-4f4d-9fc5-62d56a151988",
+        "grant_type": "refresh_token",
+        "refresh_token": "a171ab16c270a86be0dea1dcd2f36b0a"
+      }'</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5NzY0NTU3ODA3NiIsIm5hbWUiOiJKb2huIERvZSIsImFkbWluIjp0cnVlfQ.g5XG4KXa3QYiJDEtBQwY0qnnvRnS8JbFDEl7ngUwT0A"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e0fb5bc8439833bcd5eab25c7004994"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>When you receive an Access Token from the API through the <code class="prettyprint">/authenticate</code> endpoint, you also receive a <em>Refresh Token</em>. This token may be used so continue your users session without prompting for their password again.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">client_id</code> <em>REQUIRED</em></td>
+<td style="text-align: left">Issued to you when you register your application through <code class="prettyprint">developer.tappr.io</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">grant_type</code> <em>REQUIRED</em></td>
+<td style="text-align: left">should be <code class="prettyprint">refresh_token</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">refresh_token</code> <em>REQUIRED</em></td>
+<td style="text-align: left">the value of <em>Refresh Token</em> you got from password authentication</td>
+</tr>
+</tbody></table>
+
+          <h1 id="users">Users</h1>
+
+<h3 id="fields">Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">configuration</code></td>
+<td style="text-align: left">Used to synchronize client specific settings</td>
+</tr>
+</tbody></table>
+
+<h2 id="user-create">User Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/user"</span> <span class="se">\</span>
+    -d <span class="s1">'{
+            "email": "user@example.com",
+            "first_name": "John",
+            "last_name": "Smith",
+            "pin": "1387"
+        }'</span>
+</code></pre>
+<h2 id="user-get">User Get</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/user"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@tappr.io"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"employments"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"business"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cf3e762c-d19d-41f6-a396-b9f00999adbf"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                    </span><span class="p">{</span><span class="w">
+                        </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                            </span><span class="nt">"address_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"coordinates_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1062 Ann Street"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
+                            </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QLD"</span><span class="w">
+                        </span><span class="p">},</span><span class="w">
+                        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d152fd34-c884-4d91-a6d1-82a7685bb210"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Primary"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1300TAPPR"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
+                        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">],</span><span class="w">
+                </span><span class="nt">"mcc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5735"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"owner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7dae556-fee0-4e8e-9c94-0deea6a16fd6"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"registered_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr Pty Ltd"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"trading_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"use_trading_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@tappr.io"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6c46a5fc-a41e-41b2-9fb3-9827162c4254"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Developer"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7dae556-fee0-4e8e-9c94-0deea6a16fd6"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Developer"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"pin"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479878939</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@tappr.io"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+          <h1 id="orders">Orders</h1>
+
+<h2 id="order-create">Order Create</h2>
+
+<h3 id="fields">Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">items</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">This field represents the goods provided through this order</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">status</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">[<code class="prettyprint">OPEN</code></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">total</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">This field <em>must</em> be the total displayed to a customer</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">opened_at</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">The epoch timestamp the order was created at</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">opened_by</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">The ID of the User that created the order</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">reference</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">An arbitrary id provided by the payment provider</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">reference_source</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">The source that provided the reference</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/locations/:location_id/orders"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span> <span class="se">\</span>
+    -d <span class="s1">'{
+            "items": [
+                {
+                    "discounts": [],
+                    "fees": [],
+                    "name": "Custom",
+                    "price": {
+                        "currency_code": "AUD",
+                        "minor_units": 500
+                    },
+                    "quantity": 1.0,
+                    "total": {
+                        "currency_code": "AUD",
+                        "minor_units": 500
+                    },
+                    "type": "CUSTOM"
+                }
+            ],
+            "opened_at": 1481844679.02264,
+            "opened_by": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
+            "reference": "EC6D6350-E7CB-4169-AA24-1009D4ED4363",
+            "reference_source": "TAPPR",
+            "status": "COMPLETED",
+            "tenders": [
+                {
+                    "amount": {
+                        "currency_code": "AUD",
+                        "minor_units": 500
+                    },
+                    "change": {
+                        "currency_code": "AUD",
+                        "minor_units": 0
+                    },
+                    "device_id": "CAF1E353-EBB9-4209-A7EF-E5BF0815B7DA",
+                    "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
+                    "payment_type": "CASH",
+                    "reference": "6978D003-C98B-424F-9DC3-66D0F86D356E",
+                    "tendered": {
+                        "currency_code": "AUD",
+                        "minor_units": 0
+                    }
+                }
+            ],
+            "total": {
+                "currency_code": "AUD",
+                "minor_units": 500
+            }
+        }'</span>
+</code></pre>
+<h2 id="get-all-orders">Get all Orders</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/locations/:lid/orders"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c953f762-112b-435a-b67d-9f5e2d0b8258"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Custom"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CUSTOM"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"711f4255-8d64-4ea9-993b-7e1fdf0971bb"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opened_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-11-18T01:53:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"opened_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e304336-74cc-49e6-b7d8-f1c59f4258c0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"005BA12F-31C9-47D8-A8B7-4BD1C2A48542"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reference_source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TAPPR"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COMPLETED"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tenders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"change"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"device_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"caf1e353-ebb9-4209-a7ef-e5bf0815b7da"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"employee_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e304336-74cc-49e6-b7d8-f1c59f4258c0"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a608c9f6-4016-42e3-9596-b00979bd4f7c"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"711f4255-8d64-4ea9-993b-7e1fdf0971bb"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c953f762-112b-435a-b67d-9f5e2d0b8258"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CASH"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A757AC47-73ED-4359-B03D-072C897F0D09"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"tendered"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">4000</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+<h2 id="orderitems">OrderItems</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Default</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">name</code></td>
+<td style="text-align: left"><code class="prettyprint">Custom</code></td>
+<td style="text-align: left">The name of the order item</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">quantity</code></td>
+<td style="text-align: left"><code class="prettyprint">1.0</code></td>
+<td style="text-align: left">The quantity of units sold</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">type</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left"><code class="prettyprint">[CUSTOM, PRODUCT]</code></td>
+</tr>
+</tbody></table>
+
+          <h1 id="tenders">Tenders</h1>
+
+<h2 id="tender-create">Tender Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="c"># curl -X POST "https://api.tappr.io/locations/:location_id/orders/:order_id/tenders" \</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+    -d <span class="s1">'{
+            "amount": {
+                "currency_code": "AUD",
+                "minor_units": 500
+            },
+            "change": {
+                "currency_code": "AUD",
+                "minor_units": 0
+            },
+            "device_id": "CAF1E353-EBB9-4209-A7EF-E5BF0815B7DA",
+            "employee_id": "7e304336-74cc-49e6-b7d8-f1c59f4258c0",
+            "payment_type": "CASH",
+            "reference": "6978D003-C98B-424F-9DC3-66D0F86D356E",
+            "tendered": {
+                "currency_code": "AUD",
+                "minor_units": 0
+            }
+        }'</span>
+
+</code></pre>
+<h3 id="fields">Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">amount</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">The amount given</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">tendered</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">The amount taken (typically equivalent to amount for non cash tenders)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">change</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">The amount returned (typically zero for non cash tenders)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">reference</code></td>
+<td style="text-align: left"><code class="prettyprint">Optional</code></td>
+<td style="text-align: left">An arbitrary id provided by the payment provider</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">reference_source</code></td>
+<td style="text-align: left"><code class="prettyprint">Optional</code></td>
+<td style="text-align: left">The source that provided the reference</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-tenders">Get all Tenders</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/locations/:location_id/orders/:order_id/tenders"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"change"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"device_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"caf1e353-ebb9-4209-a7ef-e5bf0815b7da"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"employee_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7e304336-74cc-49e6-b7d8-f1c59f4258c0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a608c9f6-4016-42e3-9596-b00979bd4f7c"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"location_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"711f4255-8d64-4ea9-993b-7e1fdf0971bb"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="s2">"{}"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c953f762-112b-435a-b67d-9f5e2d0b8258"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"payment_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CASH"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A757AC47-73ED-4359-B03D-072C897F0D09"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tendered"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479433994</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+          <h1 id="products">Products</h1>
+
+<h3 id="variants">Variants</h3>
+
+<p>Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.</p>
+
+<p>Typically this would be different sizes of the same product.</p>
+
+<h2 id="product-create">Product Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses/:business_id/products"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+    -d <span class="s1">'{
+            "name": "Snapper",
+            "variants": [
+                {
+                    "amount": {
+                        "currency_code": "AUD",
+                        "minor_units": 19999
+                    },
+                    "configuration": {},
+                    "created_at": 1479344701,
+                    "id": "730ebb67-9ec5-4013-898d-71a52ca780eb",
+                    "updated_at": 1479344701
+                }
+            ]
+        }'</span>
+</code></pre>
+<h3 id="fields">Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Requirements</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">variants</code></td>
+<td style="text-align: left"><code class="prettyprint">count &gt; 0</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="get-all-products">Get all Products</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/businesses/:business_id/products"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+        </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479344701</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2edd62d6-58cf-426b-b5fe-b60d8b1cb45f"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Red Herring"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479344701</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"variants"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"minor_units"</span><span class="p">:</span><span class="w"> </span><span class="mi">19999</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"configuration"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w">
+                </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479344701</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"730ebb67-9ec5-4013-898d-71a52ca780eb"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479344701</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+          <h1 id="fees">Fees</h1>
+
+<h2 id="fee-create">Fee Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses/:business_id/fees"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+    -d <span class="s1">'{ }'</span>
+
+</code></pre>
+<h2 id="get-all-fees">Get all Fees</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/businesses/:business_id/fees"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre>
+          <h1 id="discounts">Discounts</h1>
+
+<h2 id="discount-create">Discount Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses/:business_id/discounts"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+    -d <span class="s1">'{ }'</span>
+
+</code></pre>
+<h2 id="get-all-discounts">Get all Discounts</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/businesses/:business_id/discounts"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre>
+          <h1 id="businesses">Businesses</h1>
+
+<h2 id="business-create">Business Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span> <span class="se">\</span>
+    -d <span class="s1">'{ }'</span>
+</code></pre>
+<h2 id="get-all-businesses">Get all Businesses</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/businesses"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"currency_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AUD"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cf3e762c-d19d-41f6-a396-b9f00999adbf"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"locations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="nt">"address_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"coordinates_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1062 Ann Street"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
+                    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QLD"</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d152fd34-c884-4d91-a6d1-82a7685bb210"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Primary"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1300TAPPR"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="nt">"mcc"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5735"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"owner_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c7dae556-fee0-4e8e-9c94-0deea6a16fd6"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"registered_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr Pty Ltd"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"trading_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Tappr"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"use_trading_name"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span></code></pre>
+          <h1 id="locations">Locations</h1>
+
+<h2 id="location-create">Location Create</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses/:business_id/locations"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span> <span class="se">\</span>
+    -d <span class="s1">'{ }'</span>
+</code></pre>
+<h2 id="get-all-locations">Get all Locations</h2>
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/business/:business_id/locations"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">    </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"address_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fortitude Valley"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"coordinates_resolved"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1062 Ann Street"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"postcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4006"</span><span class="p">,</span><span class="w">
+                </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QLD"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d152fd34-c884-4d91-a6d1-82a7685bb210"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Primary"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1300TAPPR"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"timezone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Australia/Brisbane"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="mi">1479257221</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span></code></pre>
       </div>
       <div class="dark-box">
           <div class="lang-selector">

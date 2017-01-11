@@ -1,4 +1,3 @@
-
 # Authentication
 
 ## Password Authentication
@@ -29,10 +28,10 @@ Tappr's API expects an active API token to be included in request all authorized
 
 | Field       | Description                                                                   |
 |:------------|:------------------------------------------------------------------------------|
-| `client_id` | Issued to you when you register your application through `developer.tappr.io` |
-| `grant_type`| It supports `password` and `refresh_token` at the moment                      |
-| `username`  | user name of Tappr                                                            |
-| `password`  | password of Tappr                                                             |
+| `client_id`   _REQUIRED_  | Issued to you when you register your application through `developer.tappr.io` |
+| `grant_type`  _REQUIRED_  | Should be `password`, other grant type is `refresh_token`                     |
+| `username`    _REQUIRED_  | user name of Tappr                                                            |
+| `password`    _REQUIRED_  | password of Tappr                                                             |
 
 ## Refreshing Authentication
 
@@ -61,6 +60,6 @@ When you receive an Access Token from the API through the `/authenticate` endpoi
 
 | Field       | Description                                                                   |
 |:------------|:------------------------------------------------------------------------------|
-| `client_id` | Issued to you when you register your application through `developer.tappr.io` |
-| `grant_type`| should be `refresh_token`                                                     |
-| `refresh_token`| the value of _Refresh Token_ you got from password authentication          |
+| `client_id` _REQUIRED_      | Issued to you when you register your application through `developer.tappr.io` |
+| `grant_type` _REQUIRED_     | should be `refresh_token`                                                     |
+| `refresh_token` _REQUIRED_  | the value of _Refresh Token_ you got from password authentication          |

@@ -21,7 +21,9 @@ includes:
 
 search: true
 ---
-
 # Introduction
 
 <aside class="notice">Tappr API doc. This is a WORKING copy and will change.</aside>
+Welcome to the Tappr API! You can use our API to access Tappr API endpoints.
+
+You can view code examples in the dark area to the right.

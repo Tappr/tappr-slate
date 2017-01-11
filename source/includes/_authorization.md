@@ -1,12 +1,6 @@
 
 # Authentication
 
-### Fields
-
-| Field       | Description                                                                   |
-|:------------|:------------------------------------------------------------------------------|
-| `client_id` | Issued to you when you register your application through `developer.tappr.io` |
-
 ## Password Authentication
 
 > Request
@@ -33,6 +27,13 @@ curl -X POST https://api.tappr.io/v1/authenticate \
 
 Tappr's API expects an active API token to be included in request all authorized endpoints.
 
+| Field       | Description                                                                   |
+|:------------|:------------------------------------------------------------------------------|
+| `client_id` | Issued to you when you register your application through `developer.tappr.io` |
+| `grant_type`| It supports `password` and `refresh_token` at the moment                      |
+| `username`  | user name of Tappr                                                            |
+| `password`  | password of Tappr                                                             |
+
 ## Refreshing Authentication
 
 > Request
@@ -57,3 +58,9 @@ curl -X POST https://api.tappr.io/v1/authenticate \
 ```
 
 When you receive an Access Token from the API through the `/authenticate` endpoint, you also receive a _Refresh Token_. This token may be used so continue your users session without prompting for their password again.
+
+| Field       | Description                                                                   |
+|:------------|:------------------------------------------------------------------------------|
+| `client_id` | Issued to you when you register your application through `developer.tappr.io` |
+| `grant_type`| should be `refresh_token`                                                     |
+| `refresh_token`| the value of _Refresh Token_ you got from password authentication          |

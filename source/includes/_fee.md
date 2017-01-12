@@ -1,7 +1,57 @@
 
 # Fees
 
-## Fee Create
+Merchants must collect appropriate fees or "Taxes" based on their business and the products they sell. A fee, once defined, can be associated to a category, item or all tenders.
+
+
+## Get List
+Get all fee rates for this merchant.
+
+>Request 
+
+```shell 
+curl -X POST https://api.tappr.io/v1/businesses/:business_id/fees
+
+```
+
+###ARGUMENTS
+
+| Field              | Note       | Description                                                 |
+|:-------------------|:-----------|:------------------------------------------------------------|
+| `if_modified_since`            |    `header`        | string (Optional) |
+| `created_at`           | `query` | string (Optional)                           |
+| `updated_at`            | `query` | string (Optional)     |
+| `limit`        | `query` | integer (Optional)              |
+| `business_id`        | `query` | string (Optional)                 |
+
+
+
+## Create Fee
+
+Create a fee rate definition for a business.
+
+```shell 
+curl -X POST https://api.tappr.io/v1/businesses/:business_id/fees
+
+```
+
+###ARGUMENTS
+
+| Field              | Note       | Description                                                 |
+|:-------------------|:-----------|:------------------------------------------------------------|
+| `tax_id`        | `query` | string (Required)              |
+| `business_id`        | `path` | string (Required)                 |
+
+## Delete Fee
+
+Delete a tax.
+
+###ARGUMENTS
+
+| Field              | Note       | Description                                                 |
+|:-------------------|:-----------|:------------------------------------------------------------|
+| `tax_id`        | `query` | string (Required)              |
+| `business_id`        | `path` | string (Required)                 |
 
 > Request
 
@@ -12,7 +62,7 @@ curl -X POST "https://api.tappr.io/businesses/:business_id/fees" \
 
 ```
 
-## Get all Fees
+
 
 > Request
 

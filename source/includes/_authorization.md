@@ -1,5 +1,16 @@
 # Authentication
 
+## OAuth
+The Tappr API Implements <a>OAuth 2.0</a> to allow users to log in to applications without exposing their credentials. The process involves several steps.
+
+1. Acquire an access token, and optinoally a refresh token
+2. Use the access token to make authenticated requests
+3. If you were issued a refresh token: refresh the access token when it expires
+
+<aside class="notice">To get started quicky, you can use the access token from the API playground and avoic implementing the OAuth login flow.</aside>
+
+Before you begin, you need to create a client in the developer tools.
+
 ## Password Authentication
 
 > Request

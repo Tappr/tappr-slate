@@ -1,7 +1,18 @@
 
 # Products
 
-### Variants
+Products are what a merchant sells at their business. Products have a `name`, `shotcode`, `sku`, and `price`. `sku` should be unique for tracking inventory. 
+
+
+## Get List
+
+## Create Product
+
+## Update Product
+
+## Categories
+
+## Variants
 
 Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.
 
@@ -15,7 +26,7 @@ Typically this would be different sizes of the same product.
 curl -X POST "https://api.tappr.io/businesses/:business_id/products" \
     -H "Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
     -d '{
-            "name": "Snapper",
+            "name": "Flat-White",
             "variants": [
                 {
                     "amount": {

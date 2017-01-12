@@ -1,6 +1,11 @@
 
 # Users
 
+Users are the merchant users and can be broken down to several roles. Typically the primary Sole Trader, Director or owner is the main user. This role is called the Primary Owner.
+
+
+
+
 ### Fields
 
 | Field           | Description                                  |
@@ -8,6 +13,16 @@
 | `configuration` | Used to synchronize client specific settings |
 
 ## User Create
+
+### Request Paramaters
+
+| Field           |Type             | Description                        |
+|:----------------|:----------------|:-------------------------------------|
+| `first_name`    |`string` | The user's first name. |
+| `last_name` |`string` | The user's last name. |
+| `role_ids(optional)` |`string` || The ids of the user's associated roles. |
+| `email` |`string` | The user's email address. |
+| `phone` |`string` | The user's phone number. |
 
 > Request
 
@@ -22,6 +37,10 @@ curl -X POST "https://api.tappr.io/user" \
 ```
 
 ## User Get
+
+`GET /a1/me/users`
+
+Provides summary data for all of a businesse's users.
 
 > Request
 

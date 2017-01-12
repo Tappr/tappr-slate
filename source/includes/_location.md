@@ -3,6 +3,8 @@
 
 ## Location Create
 
+`POST /v1/me/locations`
+
 > Request
 
 ```shell
@@ -11,16 +13,20 @@ curl -X POST "https://api.tappr.io/businesses/:business_id/locations" \
     -d '{ }'
 ```
 
-## Get all Locations
+## Get Locations
 
-> Request
+`GET /v1/me/locations`
+
+Provides detials for a business's locations, including thier unique ID's. 
+
+> Example Request
 
 ```shell
 curl -X GET "https://api.tappr.io/business/:business_id/locations" \
     -H "Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"
 ```
 
-> Response
+> Example Response
 
 ```json
     [

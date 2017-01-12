@@ -1,6 +1,27 @@
 
 # Orders
 
+Orders represents a customer's request to purchase one or more items from a business. An order contains details about all the items or supplimentary sale requirements like discounts or fees. An order can be Open, Voided or Completed states. An active order will be in an Open state. 
+
+### Arguements
+
+| Field              | Note       | Description                                                 |
+|:-------------------|:-----------|:------------------------------------------------------------|
+| `business_id`            |      `path`      | String (Required)   |
+| `if_modified_since`           | `header` | String (Optional)                          |
+| `start_at`            | `query` | String (Optional)            |
+| `end_at`        | `query` | String (Optional)                   |
+| `limit`        | `query` | String (Optional)                        |
+| `cardNumberFirst6`        | `Required` | String (Optional)                 |
+| `cardNumberLast4` | `query` | String (Optional)                           |
+| `cardExpirationMonth` | `query` | String (Optional)                    |
+| `cardExpirationYear` | `query` | String (Optional)                    |
+| `cardHolderFirstName` | `query` | String (Optional)                    |
+| `cardHolderLastName` | `query` | String (Optional)                    |
+| `store_id` | `query` | String (Optional)                    |
+| `includesStaysAll` | `query` | Boolean (Optional)                    |
+
+
 ## Order Create
 
 ### Fields
@@ -71,6 +92,18 @@ curl -X POST "https://api.tappr.io/locations/:location_id/orders" \
 ```
 
 ## Get all Orders
+
+Get all Orders that match specific filters. If no filter is specified it will fetch all order for the business since the business started. Tappr currently returns 20 records at a time. 
+
+
+### ARGUEMENTS
+
+| Field           |Type             | Description                        |
+|:----------------|:----------------|:-------------------------------------|
+| `business_id`    |`path` | string (required) |
+| `if_modifed_since`    |`header` | string (optional) |
+| `created_at`    |`query` | string (optional) |
+| `ended_at`    |`query` | string (optional) |
 
 > Request
 

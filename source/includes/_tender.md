@@ -40,7 +40,6 @@
 | `reference_source` | `Optional` | The source that provided the reference                                 |
 
 ## Get all Tenders
-
 > Request
 
 ```shell
@@ -78,3 +77,26 @@ curl -X GET "https://api.tappr.io/locations/:location_id/orders/:order_id/tender
     }
 ]
 ```
+
+
+Get all transactions that match the specified filters. If no filter is specified it will fetch all transactions for the business since it started. We currently return 20 records at a time.
+
+### Fields
+
+|             |       |                                                             |
+|:-------------------|:-----------|:-----------------------------------------------------------------------|
+| `business_id`           |    `path`        | The unique id of the business.                                                      |
+| `device_id`           |    `query`        | The serial number of the terminal allocated to the merchant.                                                      |
+| `employee_id`           |    `query`        | The unique id of the employee.                                                     |
+| `payment_type`           |    `query`        |                                                     |
+| `card_scheme`           |    `query`        |                                                     |
+| `card_account`           |    `query`        |                                                     |
+| `pan_suffix`           |    `query`        |                                                     |
+| `currency_code`           |    `query`        |                                                     
+| `amount`           |            | The amount given                                                       |
+| `tendered`         |            | The amount taken (typically equivalent to amount for non cash tenders) |
+| `change`           |            | The amount returned (typically zero for non cash tenders)              |
+| `reference`        | `Optional` | An arbitrary id provided by the payment provider                       |
+| `reference_source` | `Optional` | The source that provided the reference                                 |
+
+

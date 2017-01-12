@@ -27,3 +27,5 @@ search: true
 Welcome to the Tappr API! You can use our API to access Tappr API endpoints.
 
 You can view code examples in the dark area to the right.
+
+   <script async defer src="https://slackin-tpsaqfrvhh.now.sh/slackin.js"></script>

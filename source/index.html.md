@@ -28,4 +28,8 @@ Welcome to the Tappr API! You can use our API to access Tappr API endpoints.
 
 You can view code examples in the dark area to the right.
 
+Our developers’ community in Slack is the place to get help with our API, discuss ideas, and show off what you build.
+
+   [Join Slack Now](https://slackin-tpsaqfrvhh.now.sh/)
+
    <script async defer src="https://slackin-tpsaqfrvhh.now.sh/slackin.js"></script>

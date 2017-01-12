@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;swift&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,6 +102,9 @@
       <img src="images/logo.png" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="swift">swift</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -117,18 +120,44 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
+<pre class="highlight shell"><code>
+  API endpoint
+  https://api.tappr.io
 
-<aside class="notice">Tappr API doc. This is a WORKING copy and will change.</aside>
-
+</code></pre>
 <p>Welcome to the Tappr API! You can use our API to access Tappr API endpoints.</p>
 
 <p>You can view code examples in the dark area to the right.</p>
 
-<p>Our developers’ community in Slack is the place to get help with our API, discuss ideas, and show off what you build.</p>
+<p>Our developers’ community in Slack is the place to get help with our API, discuss ideas, and show off what you build. Hit the link below to join. </p>
 
-<p>Hit the button to join:  <script async defer src="https://slackin-tpsaqfrvhh.now.sh/slackin.js"></script></p>
+<p><script async defer src="https://slackin-tpsaqfrvhh.now.sh/slackin.js"></script></p>
+
+<p><aside class="notice">Tappr API doc. This is a WORKING copy and will change.</aside></p>
+
+<h2 id="standards">Standards</h2>
+
+<p>Tappr&rsquo;s API is built with commonly used RESTful design patterns in the industry. Below you&rsquo;ll see all the Tappr services and can access through HTTP semantics. HTTPS stauts codes are used to communicate the states, OAuth 2.0 is used for API Authentication and Authorisations.</p>
+
+<h2 id="date-and-times">Date and Times</h2>
+
+<p>All date time values are in UTC and is formatted</p>
 
           <h1 id="authentication">Authentication</h1>
+
+<h2 id="oauth">OAuth</h2>
+
+<p>The Tappr API Implements <a>OAuth 2.0</a> to allow users to log in to applications without exposing their credentials. The process involves several steps.</p>
+
+<ol>
+<li>Acquire an access token, and optinoally a refresh token</li>
+<li>Use the access token to make authenticated requests</li>
+<li>If you were issued a refresh token: refresh the access token when it expires</li>
+</ol>
+
+<aside class="notice">To get started quicky, you can use the access token from the API playground and avoic implementing the OAuth login flow.</aside>
+
+<p>Before you begin, you need to create a client in the developer tools.</p>
 
 <h2 id="password-authentication">Password Authentication</h2>
 
@@ -221,7 +250,33 @@
 </tr>
 </tbody></table>
 
+          <h1 id="pagination">Pagination</h1>
+
+<p>Endpoints such as Orders might paginate the results they return. This means that instead of returning all results in a single response, these endpoints might return some of the results, along with a &lsquo;cursor&rsquo; in the response body that links to the next set of results. The current maximum is currently set at 20.</p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">limit</code>   <em>OPTIONAL</em></td>
+<td style="text-align: left">Limits the number of results per-page. Maximum 20.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">since</code>   <em>OPTIONAL</em></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">before</code>    <em>OPTIONAL</em></td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
           <h1 id="users">Users</h1>
+
+<p>Users are the merchant users and can be broken down to several roles. Typically the primary Sole Trader, Director or owner is the main user. This role is called the Primary Owner.</p>
 
 <h3 id="fields">Fields</h3>
 
@@ -239,6 +294,42 @@
 
 <h2 id="user-create">User Create</h2>
 
+<h3 id="request-paramaters">Request Paramaters</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">first_name</code></td>
+<td style="text-align: left"><code class="prettyprint">string</code></td>
+<td style="text-align: left">The user&rsquo;s first name.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">last_name</code></td>
+<td style="text-align: left"><code class="prettyprint">string</code></td>
+<td style="text-align: left">The user&rsquo;s last name.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">role_ids(optional)</code></td>
+<td style="text-align: left"><code class="prettyprint">string</code></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">email</code></td>
+<td style="text-align: left"><code class="prettyprint">string</code></td>
+<td style="text-align: left">The user&rsquo;s email address.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">phone</code></td>
+<td style="text-align: left"><code class="prettyprint">string</code></td>
+<td style="text-align: left">The user&rsquo;s phone number.</td>
+</tr>
+</tbody></table>
+
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -251,6 +342,10 @@
         }'</span>
 </code></pre>
 <h2 id="user-get">User Get</h2>
+
+<p><code class="prettyprint">GET /a1/me/users</code></p>
+
+<p>Provides summary data for all of a businesse&rsquo;s users.</p>
 
 <blockquote>
 <p>Request</p>
@@ -314,7 +409,134 @@
     </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@tappr.io"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+          <h1 id="roles">Roles</h1>
+
+<p>Roles are a defined set of permissions for users. There are four main role permissions. </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Role</th>
+<th style="text-align: left">Rank</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">primary_owner</code></td>
+<td style="text-align: left"><code class="prettyprint">1</code></td>
+<td style="text-align: left">The primary owner of the business or admin.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">owner (2IC)</code></td>
+<td style="text-align: left"><code class="prettyprint">2</code></td>
+<td style="text-align: left">The second in command, and has similar functionality to the primary owner.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">manager</code></td>
+<td style="text-align: left"><code class="prettyprint">3</code></td>
+<td style="text-align: left">A Manager of the business.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">user</code></td>
+<td style="text-align: left"><code class="prettyprint">4</code></td>
+<td style="text-align: left">A user is an employee with limited functionality</td>
+</tr>
+</tbody></table>
+
+<h3 id="arguements">Arguements</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">String (Required)</td>
+</tr>
+</tbody></table>
+
           <h1 id="orders">Orders</h1>
+
+<p>Orders represents a customer&rsquo;s request to purchase one or more items from a business. An order contains details about all the items or supplimentary sale requirements like discounts or fees. An order can be Open, Voided or Completed states. An active order will be in an Open state. </p>
+
+<h3 id="arguements">Arguements</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">String (Required)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">if_modified_since</code></td>
+<td style="text-align: left"><code class="prettyprint">header</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">start_at</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">end_at</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">limit</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">cardNumberFirst6</code></td>
+<td style="text-align: left"><code class="prettyprint">Required</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">cardNumberLast4</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">cardExpirationMonth</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">cardExpirationYear</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">cardHolderFirstName</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">cardHolderLastName</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">store_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">String (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">includesStaysAll</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">Boolean (Optional)</td>
+</tr>
+</tbody></table>
 
 <h2 id="order-create">Order Create</h2>
 
@@ -419,6 +641,39 @@
         }'</span>
 </code></pre>
 <h2 id="get-all-orders">Get all Orders</h2>
+
+<p>Get all Orders that match specific filters. If no filter is specified it will fetch all order for the business since the business started. Tappr currently returns 20 records at a time. </p>
+
+<h3 id="arguements">ARGUEMENTS</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Type</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">string (required)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">if_modifed_since</code></td>
+<td style="text-align: left"><code class="prettyprint">header</code></td>
+<td style="text-align: left">string (optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">created_at</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">ended_at</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+</tr>
+</tbody></table>
 
 <blockquote>
 <p>Request</p>
@@ -619,9 +874,97 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
+<p>Get all transactions that match the specified filters. If no filter is specified it will fetch all transactions for the business since it started. We currently return 20 records at a time.</p>
+
+<h3 id="fields">Fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">The unique id of the business.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">device_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">The serial number of the terminal allocated to the merchant.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">employee_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">The unique id of the employee.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">payment_type</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">card_scheme</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">card_account</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">pan_suffix</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">currency_code</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">amount</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">The amount given</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">tendered</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">The amount taken (typically equivalent to amount for non cash tenders)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">change</code></td>
+<td style="text-align: left"></td>
+<td style="text-align: left">The amount returned (typically zero for non cash tenders)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">reference</code></td>
+<td style="text-align: left"><code class="prettyprint">Optional</code></td>
+<td style="text-align: left">An arbitrary id provided by the payment provider</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">reference_source</code></td>
+<td style="text-align: left"><code class="prettyprint">Optional</code></td>
+<td style="text-align: left">The source that provided the reference</td>
+</tr>
+</tbody></table>
+
           <h1 id="products">Products</h1>
 
-<h3 id="variants">Variants</h3>
+<p>Products are what a merchant sells at their business. Products have a <code class="prettyprint">name</code>, <code class="prettyprint">shotcode</code>, <code class="prettyprint">sku</code>, and <code class="prettyprint">price</code>. <code class="prettyprint">sku</code> should be unique for tracking inventory. </p>
+
+<h2 id="get-list">Get List</h2>
+
+<h2 id="create-product">Create Product</h2>
+
+<h2 id="update-product">Update Product</h2>
+
+<h2 id="categories">Categories</h2>
+
+<h2 id="variants">Variants</h2>
 
 <p>Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.</p>
 
@@ -635,7 +978,7 @@
 <pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses/:business_id/products"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
     -d <span class="s1">'{
-            "name": "Snapper",
+            "name": "Flat-White",
             "variants": [
                 {
                     "amount": {
@@ -701,7 +1044,105 @@
 </span></code></pre>
           <h1 id="fees">Fees</h1>
 
-<h2 id="fee-create">Fee Create</h2>
+<p>Merchants must collect appropriate fees or &ldquo;Taxes&rdquo; based on their business and the products they sell. A fee, once defined, can be associated to a category, item or all tenders.</p>
+
+<h2 id="get-list">Get List</h2>
+
+<p>Get all fee rates for this merchant.</p>
+
+<blockquote>
+<p>Request </p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST https://api.tappr.io/v1/businesses/:business_id/fees
+
+</code></pre>
+<h3 id="arguments">ARGUMENTS</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">if_modified_since</code></td>
+<td style="text-align: left"><code class="prettyprint">header</code></td>
+<td style="text-align: left">string (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">created_at</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">updated_at</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">limit</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">integer (Optional)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (Optional)</td>
+</tr>
+</tbody></table>
+
+<h2 id="create-fee">Create Fee</h2>
+
+<p>Create a fee rate definition for a business.</p>
+<pre class="highlight shell"><code>curl -X POST https://api.tappr.io/v1/businesses/:business_id/fees
+
+</code></pre>
+<h3 id="arguments">ARGUMENTS</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">tax_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (Required)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">string (Required)</td>
+</tr>
+</tbody></table>
+
+<h2 id="delete-fee">Delete Fee</h2>
+
+<p>Delete a tax.</p>
+
+<h3 id="arguments">ARGUMENTS</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left">Note</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">tax_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (Required)</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">string (Required)</td>
+</tr>
+</tbody></table>
 
 <blockquote>
 <p>Request</p>
@@ -711,8 +1152,6 @@
     -d <span class="s1">'{ }'</span>
 
 </code></pre>
-<h2 id="get-all-fees">Get all Fees</h2>
-
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -806,6 +1245,8 @@
 
 <h2 id="location-create">Location Create</h2>
 
+<p><code class="prettyprint">POST /v1/me/locations</code></p>
+
 <blockquote>
 <p>Request</p>
 </blockquote>
@@ -813,16 +1254,20 @@
     -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span> <span class="se">\</span>
     -d <span class="s1">'{ }'</span>
 </code></pre>
-<h2 id="get-all-locations">Get all Locations</h2>
+<h2 id="get-locations">Get Locations</h2>
+
+<p><code class="prettyprint">GET /v1/me/locations</code></p>
+
+<p>Provides detials for a business&rsquo;s locations, including thier unique ID&rsquo;s. </p>
 
 <blockquote>
-<p>Request</p>
+<p>Example Request</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/business/:business_id/locations"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
 </code></pre>
 <blockquote>
-<p>Response</p>
+<p>Example Response</p>
 </blockquote>
 <pre class="highlight json"><code><span class="w">    </span><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -844,10 +1289,71 @@
         </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
 </span></code></pre>
+          <h1 id="customers">Customers</h1>
+
+<p>Customers are anyone that interfaces with a Tappr terminal using a credit or debit card. </p>
+
+<aside class="notice">Tappr&rsquo;s customer API module is currently in development alongside our Gateway. </aside>
+
+          <h1 id="errors">Errors</h1>
+
+<p>The API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request had an error</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified item could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The item requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many items! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+</tr>
+</tbody></table>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="swift">swift</a>
           </div>
       </div>
     </div>

@@ -36,6 +36,26 @@ search: true
 
 ```
 
+```ruby
+
+  API endpoint
+  https://api.tappr.io
+
+```
+
+```python
+
+  API endpoint
+  https://api.tappr.io
+
+```
+
+```swift
+
+  API endpoint
+  https://api.tappr.io
+
+```
 
 Welcome to the Tappr API! You can use our API to access Tappr API endpoints.
 

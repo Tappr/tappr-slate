@@ -4,7 +4,7 @@
 Merchants must collect appropriate fees or "Taxes" based on their business and the products they sell. A fee, once defined, can be associated to a category, item or all tenders.
 
 
-## Get List
+## Get Fee List
 Get all fee rates for this merchant.
 
 >Request 

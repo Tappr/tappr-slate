@@ -1,6 +1,14 @@
 
 # Orders
 
+
+
+```shell
+GET / locations/{businessID}/orders
+```
+
+> Request
+
 Orders represents a customer's request to purchase one or more items from a business. An order contains details about all the items or supplimentary sale requirements like discounts or fees. An order can be Open, Voided or Completed states. An active order will be in an Open state. 
 
 ### Arguements
@@ -22,7 +30,9 @@ Orders represents a customer's request to purchase one or more items from a busi
 | `includesStaysAll` | `query` | Boolean (Optional)                    |
 
 
-## Order Create
+## Create Order
+
+`POST / locations/{businessID}/orders`
 
 ### Fields
 
@@ -177,10 +187,14 @@ curl -X GET "https://api.tappr.io/locations/:lid/orders" \
 ]
 ```
 
-## OrderItems
+## Order Items
 
 | Field      | Default  | Description                |
 |:-----------|:---------|:---------------------------|
 | `name`     | `Custom` | The name of the order item |
 | `quantity` | `1.0`    | The quantity of units sold |
 | `type`     |          | `[CUSTOM, PRODUCT]`        |
+
+## Update an Order
+
+## Cancel an Order

@@ -100,3 +100,10 @@ Get all transactions that match the specified filters. If no filter is specified
 | `reference_source` | `Optional` | The source that provided the reference                                 |
 
 
+## Update Tender
+
+
+## Get a Tender
+
+
+

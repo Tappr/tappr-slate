@@ -6,17 +6,9 @@ Products are what a merchant sells at their business. Products have a `name`, `s
 
 ## Get List
 
-## Create Product
-
-## Update Product
-
-## Categories
-
-## Variants
-
-Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.
-
-Typically this would be different sizes of the same product.
+```shell
+GET /businesses/:business_id/products
+```
 
 ## Product Create
 
@@ -47,6 +39,23 @@ curl -X POST "https://api.tappr.io/businesses/:business_id/products" \
 | Field      | Requirements |
 |:-----------|:-------------|
 | `variants` | `count > 0`  |
+
+
+## Update Product
+
+```shell
+PUT /businesses/:business_id/products
+```
+
+## Categories
+
+## Variants
+
+Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.
+
+Typically this would be different sizes of the same product.
+
+
 
 
 ## Get all Products

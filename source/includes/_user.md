@@ -8,9 +8,17 @@ Users are the merchant users and can be broken down to several roles. Typically 
 
 ### Fields
 
-| Field           | Description                                  |
-|:----------------|:---------------------------------------------|
-| `configuration` | Used to synchronize client specific settings |
+| Field                   |                  |                    | Description                                    |
+|:------------------------|:------------------|:--------------------|:-----------------------------------------------|
+| `first_name`            |      `query`      | string (optional)   | The user's first name. |
+| `last_name`             |      `query`      | string (optional)   | The user's last name. |
+| `password`              |      `query`      | string (required)   | The user's unique password. |
+| `mint_pin`              |      `query`      | string (optional)   | The user's unique pincode. |
+| `email_address`         |      `query`      | string (required)   | The user's individual email address. |
+| `user_phone`            |      `query`      | string (optional)   | The user's mobile phone number.  |
+| `employee_id`           |      `query`      | string (optional)   | The user's unique ID. |
+| `business_id`           |      `path`        | string (required)   | The business's unique ID. |
+| `role_ids`               |      `query`       | string (optional)   | The user's role. |
 
 ## User Create
 

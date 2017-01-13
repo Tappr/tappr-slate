@@ -124,6 +124,18 @@
   API endpoint
   https://api.tappr.io
 
+</code></pre><pre class="highlight ruby"><code>
+  <span class="no">API</span> <span class="n">endpoint</span>
+  <span class="n">https</span><span class="ss">:/</span><span class="o">/</span><span class="n">api</span><span class="p">.</span><span class="nf">tappr</span><span class="p">.</span><span class="nf">io</span>
+
+</code></pre><pre class="highlight python"><code>
+  <span class="n">API</span> <span class="n">endpoint</span>
+  <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">api</span><span class="o">.</span><span class="n">tappr</span><span class="o">.</span><span class="n">io</span>
+
+</code></pre><pre class="highlight swift"><code>
+  <span class="kt">API</span> <span class="n">endpoint</span>
+  <span class="nv">https</span><span class="p">:</span><span class="c1">//api.tappr.io</span>
+
 </code></pre>
 <p>Welcome to the Tappr API! You can use our API to access Tappr API endpoints.</p>
 
@@ -278,57 +290,9 @@
 
 <p>Users are the merchant users and can be broken down to several roles. Typically the primary Sole Trader, Director or owner is the main user. This role is called the Primary Owner.</p>
 
-<h3 id="fields">Fields</h3>
+<h2 id="create-user">Create User</h2>
 
-<table><thead>
-<tr>
-<th style="text-align: left">Field</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><code class="prettyprint">configuration</code></td>
-<td style="text-align: left">Used to synchronize client specific settings</td>
-</tr>
-</tbody></table>
-
-<h2 id="user-create">User Create</h2>
-
-<h3 id="request-paramaters">Request Paramaters</h3>
-
-<table><thead>
-<tr>
-<th style="text-align: left">Field</th>
-<th style="text-align: left">Type</th>
-<th style="text-align: left">Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td style="text-align: left"><code class="prettyprint">first_name</code></td>
-<td style="text-align: left"><code class="prettyprint">string</code></td>
-<td style="text-align: left">The user&rsquo;s first name.</td>
-</tr>
-<tr>
-<td style="text-align: left"><code class="prettyprint">last_name</code></td>
-<td style="text-align: left"><code class="prettyprint">string</code></td>
-<td style="text-align: left">The user&rsquo;s last name.</td>
-</tr>
-<tr>
-<td style="text-align: left"><code class="prettyprint">role_ids(optional)</code></td>
-<td style="text-align: left"><code class="prettyprint">string</code></td>
-<td style="text-align: left"></td>
-</tr>
-<tr>
-<td style="text-align: left"><code class="prettyprint">email</code></td>
-<td style="text-align: left"><code class="prettyprint">string</code></td>
-<td style="text-align: left">The user&rsquo;s email address.</td>
-</tr>
-<tr>
-<td style="text-align: left"><code class="prettyprint">phone</code></td>
-<td style="text-align: left"><code class="prettyprint">string</code></td>
-<td style="text-align: left">The user&rsquo;s phone number.</td>
-</tr>
-</tbody></table>
+<p>To create a user for a business.</p>
 
 <blockquote>
 <p>Request</p>
@@ -340,18 +304,311 @@
             "last_name": "Smith",
             "pin": "1387"
         }'</span>
+</code></pre><pre class="highlight ruby"><code><span class="c1"># Create a user (POST)</span>
+<span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'http://api.tappr.io/v1/user'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"email"</span> <span class="o">=&gt;</span> <span class="s2">"user@example.com"</span><span class="p">,</span>
+            <span class="s2">"username"</span> <span class="o">=&gt;</span> <span class="s2">"John"</span><span class="p">,</span>
+            <span class="s2">"last_name"</span> <span class="o">=&gt;</span> <span class="s2">"Smith"</span><span class="p">,</span>
+            <span class="s2">"password"</span> <span class="o">=&gt;</span> <span class="s2">"Password123"</span><span class="p">,</span>
+            <span class="s2">"echo"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="s2">"upstream_id"</span> <span class="o">=&gt;</span> <span class="s2">"f083ba0f-255d-4707-9c8e-dfd14a9c56db"</span>
+            <span class="p">},</span>
+            <span class="s2">"first_name"</span> <span class="o">=&gt;</span> <span class="s2">"John"</span>
+        <span class="p">}</span>
+
+</code></pre><pre class="highlight python"><code><span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="c"># Create a user</span>
+    <span class="c"># POST http://api.tappr.io/v1/user</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"http://api.tappr.io/v1/user"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s">"email"</span><span class="p">:</span> <span class="s">"user@example.com"</span><span class="p">,</span>
+                <span class="s">"username"</span><span class="p">:</span> <span class="s">"John"</span><span class="p">,</span>
+                <span class="s">"last_name"</span><span class="p">:</span> <span class="s">"Smith"</span><span class="p">,</span>
+                <span class="s">"password"</span><span class="p">:</span> <span class="s">"Password123"</span><span class="p">,</span>
+                <span class="s">"echo"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">"upstream_id"</span><span class="p">:</span> <span class="s">"8f0303bb-39a7-43f2-86bc-ce42b7ec9821"</span>
+                <span class="p">},</span>
+                <span class="s">"first_name"</span><span class="p">:</span> <span class="s">"John"</span>
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+
+</code></pre><pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyRequestController</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">sendRequest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/* Configure session, choose between:
+           * defaultSessionConfiguration
+           * ephemeralSessionConfiguration
+           * backgroundSessionConfigurationWithIdentifier:
+         And set session-wide properties, such as: HTTPAdditionalHeaders,
+         HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+         */</span>
+        <span class="k">let</span> <span class="nv">sessionConfig</span> <span class="o">=</span> <span class="kt">URLSessionConfiguration</span><span class="o">.</span><span class="k">default</span>
+
+        <span class="cm">/* Create session, and optionally set a URLSessionDelegate. */</span>
+        <span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">sessionConfig</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">delegateQueue</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+        <span class="cm">/* Create the Request:
+           Create a user (POST http://api.tappr.io/v1/user)
+         */</span>
+
+        <span class="k">guard</span> <span class="k">var</span> <span class="nv">URL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://api.tappr.io/v1/user"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+        <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
+
+        <span class="c1">// Headers</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"application/json; charset=utf-8"</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Content-Type"</span><span class="p">)</span>
+
+        <span class="c1">// JSON Body</span>
+
+        <span class="k">let</span> <span class="nv">bodyObject</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s">"email"</span><span class="p">:</span> <span class="s">"user@example.com"</span><span class="p">,</span>
+            <span class="s">"username"</span><span class="p">:</span> <span class="s">"John"</span><span class="p">,</span>
+            <span class="s">"last_name"</span><span class="p">:</span> <span class="s">"Smith"</span><span class="p">,</span>
+            <span class="s">"password"</span><span class="p">:</span> <span class="s">"Password123"</span><span class="p">,</span>
+            <span class="s">"echo"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s">"upstream_id"</span><span class="p">:</span> <span class="s">"f3036d28-cb17-4fce-bc55-9bcd63bc1f14"</span>
+            <span class="p">],</span>
+            <span class="s">"first_name"</span><span class="p">:</span> <span class="s">"John"</span>
+        <span class="p">]</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">withJSONObject</span><span class="p">:</span> <span class="n">bodyObject</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[])</span>
+
+        <span class="cm">/* Start a new Task */</span>
+        <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Success</span>
+                <span class="k">let</span> <span class="nv">statusCode</span> <span class="o">=</span> <span class="p">(</span><span class="n">response</span> <span class="k">as!</span> <span class="kt">HTTPURLResponse</span><span class="p">)</span><span class="o">.</span><span class="n">statusCode</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Succeeded: HTTP </span><span class="se">\(</span><span class="n">statusCode</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Failure</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Failed: %@"</span><span class="p">,</span> <span class="n">error</span><span class="o">!.</span><span class="n">localizedDescription</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="nf">finishTasksAndInvalidate</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
 </code></pre>
-<h2 id="user-get">User Get</h2>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight shell"><code><span class="o">{</span>
+  <span class="s2">"first_name"</span>: <span class="s2">"John"</span>,
+  <span class="s2">"last_name"</span>: <span class="s2">"Smith"</span>,
+  <span class="s2">"email"</span>: <span class="s2">"user@example.com"</span>,
+  <span class="s2">"username"</span>: <span class="s2">"@john.smith"</span>,
+  <span class="s2">"password"</span>: <span class="s2">"Password123"</span>,
+  <span class="s2">"echo"</span>: <span class="o">{</span>
+    <span class="s2">"upstream_id"</span>: <span class="s2">""</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre><pre class="highlight ruby"><code><span class="c1">#&lt;Tappr::user id=:token&gt; JSON: {</span>
+  <span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"John"</span><span class="p">,</span>
+  <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Smith"</span><span class="p">,</span>
+  <span class="s2">"email"</span><span class="p">:</span> <span class="s2">"user@example.com"</span><span class="p">,</span>
+  <span class="s2">"username"</span><span class="p">:</span> <span class="s2">"@john.smith"</span><span class="p">,</span>
+  <span class="s2">"password"</span><span class="p">:</span> <span class="s2">"Password123"</span><span class="p">,</span>
+  <span class="s2">"echo"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">"upstream_id"</span><span class="p">:</span> <span class="s2">""</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id="fields">Fields</h3>
 
-<p><code class="prettyprint">GET /a1/me/users</code></p>
+<table><thead>
+<tr>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">first_name</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+<td style="text-align: left">The user&rsquo;s first name.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">last_name</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+<td style="text-align: left">The user&rsquo;s last name.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">password</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (required)</td>
+<td style="text-align: left">The user&rsquo;s unique password.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">email_address</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (required)</td>
+<td style="text-align: left">The user&rsquo;s individual email address.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">user_phone</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+<td style="text-align: left">The user&rsquo;s mobile phone number.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">employee_id</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+<td style="text-align: left">The user&rsquo;s unique ID.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">string (required)</td>
+<td style="text-align: left">The business&rsquo;s unique ID.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">role_ids</code></td>
+<td style="text-align: left"><code class="prettyprint">query</code></td>
+<td style="text-align: left">string (optional)</td>
+<td style="text-align: left">The user&rsquo;s role.</td>
+</tr>
+</tbody></table>
 
-<p>Provides summary data for all of a businesse&rsquo;s users.</p>
+<h2 id="get-user">Get User</h2>
 
 <blockquote>
 <p>Request</p>
 </blockquote>
 <pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/user"</span> <span class="se">\</span>
     -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="c1"># Retrieve a user (GET )</span>
+<span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'http://api.tappr.io/v1/user'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
+
+        <span class="p">}</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
+
+  <span class="c1"># Create Request</span>
+  <span class="n">req</span> <span class="o">=</span>  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Authorization"</span><span class="p">,</span> <span class="s2">"Bearer ***** Hidden credentials *****"</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json; charset=utf-8"</span>
+  <span class="c1"># Set body</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">body</span>
+
+  <span class="c1"># Fetch Request</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Status Code: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">code</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Response Body: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight python"><code><span class="c"># Install the Python Requests library:</span>
+<span class="c"># `pip install requests`</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="c"># Retrieve a user</span>
+    <span class="c"># GET http://api.tappr.io/v1/user</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"http://api.tappr.io/v1/user"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer ***** Hidden credentials *****"</span><span class="p">,</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+</code></pre><pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyRequestController</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">sendRequest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/* Configure session, choose between:
+           * defaultSessionConfiguration
+           * ephemeralSessionConfiguration
+           * backgroundSessionConfigurationWithIdentifier:
+         And set session-wide properties, such as: HTTPAdditionalHeaders,
+         HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+         */</span>
+        <span class="k">let</span> <span class="nv">sessionConfig</span> <span class="o">=</span> <span class="kt">URLSessionConfiguration</span><span class="o">.</span><span class="k">default</span>
+
+        <span class="cm">/* Create session, and optionally set a URLSessionDelegate. */</span>
+        <span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">sessionConfig</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">delegateQueue</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+        <span class="cm">/* Create the Request:
+           Retrieve a user (GET http://api.tappr.io/v1/user)
+         */</span>
+
+        <span class="k">guard</span> <span class="k">var</span> <span class="nv">URL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://api.tappr.io/v1/user"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+        <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+
+        <span class="c1">// Headers</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"Bearer ***** Hidden credentials *****"</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Authorization"</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"application/json; charset=utf-8"</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Content-Type"</span><span class="p">)</span>
+
+        <span class="c1">// JSON Body</span>
+
+        <span class="k">let</span> <span class="nv">bodyObject</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+
+        <span class="p">]</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">withJSONObject</span><span class="p">:</span> <span class="n">bodyObject</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[])</span>
+
+        <span class="cm">/* Start a new Task */</span>
+        <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Success</span>
+                <span class="k">let</span> <span class="nv">statusCode</span> <span class="o">=</span> <span class="p">(</span><span class="n">response</span> <span class="k">as!</span> <span class="kt">HTTPURLResponse</span><span class="p">)</span><span class="o">.</span><span class="n">statusCode</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Succeeded: HTTP </span><span class="se">\(</span><span class="n">statusCode</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Failure</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Failed: %@"</span><span class="p">,</span> <span class="n">error</span><span class="o">!.</span><span class="n">localizedDescription</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="nf">finishTasksAndInvalidate</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
 </code></pre>
 <blockquote>
 <p>Response</p>
@@ -409,6 +666,36 @@
     </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example@tappr.io"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
+<p>Get a user at a business.</p>
+
+<h3 id="arguments">Arguments</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Field</th>
+<th style="text-align: left"></th>
+<th style="text-align: left"></th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left"><code class="prettyprint">employee_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">string (required)</td>
+<td style="text-align: left">The user&rsquo;s unique ID.</td>
+</tr>
+<tr>
+<td style="text-align: left"><code class="prettyprint">business_id</code></td>
+<td style="text-align: left"><code class="prettyprint">path</code></td>
+<td style="text-align: left">string (required)</td>
+<td style="text-align: left">The business&rsquo;s unique ID.</td>
+</tr>
+</tbody></table>
+
+<h2 id="update-a-user">Update a user</h2>
+
+<p>Update a user of a business with general information or a role.</p>
+
           <h1 id="roles">Roles</h1>
 
 <p>Roles are a defined set of permissions for users. There are four main role permissions. </p>
@@ -459,6 +746,11 @@
 </tbody></table>
 
           <h1 id="orders">Orders</h1>
+<pre class="highlight shell"><code>GET / locations/<span class="o">{</span>businessID<span class="o">}</span>/orders
+</code></pre>
+<blockquote>
+<p>Request</p>
+</blockquote>
 
 <p>Orders represents a customer&rsquo;s request to purchase one or more items from a business. An order contains details about all the items or supplimentary sale requirements like discounts or fees. An order can be Open, Voided or Completed states. An active order will be in an Open state. </p>
 
@@ -538,7 +830,9 @@
 </tr>
 </tbody></table>
 
-<h2 id="order-create">Order Create</h2>
+<h2 id="create-order">Create Order</h2>
+
+<p><code class="prettyprint">POST / locations/{businessID}/orders</code></p>
 
 <h3 id="fields">Fields</h3>
 
@@ -745,7 +1039,7 @@
     </span><span class="p">}</span><span class="w">
 </span><span class="p">]</span><span class="w">
 </span></code></pre>
-<h2 id="orderitems">OrderItems</h2>
+<h2 id="order-items">Order Items</h2>
 
 <table><thead>
 <tr>
@@ -770,6 +1064,10 @@
 <td style="text-align: left"><code class="prettyprint">[CUSTOM, PRODUCT]</code></td>
 </tr>
 </tbody></table>
+
+<h2 id="update-an-order">Update an Order</h2>
+
+<h2 id="cancel-an-order">Cancel an Order</h2>
 
           <h1 id="tenders">Tenders</h1>
 
@@ -952,24 +1250,17 @@
 </tr>
 </tbody></table>
 
+<h2 id="update-tender">Update Tender</h2>
+
+<h2 id="get-a-tender">Get a Tender</h2>
+
           <h1 id="products">Products</h1>
 
 <p>Products are what a merchant sells at their business. Products have a <code class="prettyprint">name</code>, <code class="prettyprint">shotcode</code>, <code class="prettyprint">sku</code>, and <code class="prettyprint">price</code>. <code class="prettyprint">sku</code> should be unique for tracking inventory. </p>
 
 <h2 id="get-list">Get List</h2>
-
-<h2 id="create-product">Create Product</h2>
-
-<h2 id="update-product">Update Product</h2>
-
-<h2 id="categories">Categories</h2>
-
-<h2 id="variants">Variants</h2>
-
-<p>Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.</p>
-
-<p>Typically this would be different sizes of the same product.</p>
-
+<pre class="highlight shell"><code>GET /businesses/:business_id/products
+</code></pre>
 <h2 id="product-create">Product Create</h2>
 
 <blockquote>
@@ -1006,6 +1297,17 @@
 <td style="text-align: left"><code class="prettyprint">count &gt; 0</code></td>
 </tr>
 </tbody></table>
+
+<h2 id="update-product">Update Product</h2>
+<pre class="highlight shell"><code>PUT /businesses/:business_id/products
+</code></pre>
+<h2 id="categories">Categories</h2>
+
+<h2 id="variants">Variants</h2>
+
+<p>Products may have 1 or more Variants. Variants represent different physical versions of a single product. Variants are where the price for the product is stored.</p>
+
+<p>Typically this would be different sizes of the same product.</p>
 
 <h2 id="get-all-products">Get all Products</h2>
 
@@ -1046,14 +1348,170 @@
 
 <p>Merchants must collect appropriate fees or &ldquo;Taxes&rdquo; based on their business and the products they sell. A fee, once defined, can be associated to a category, item or all tenders.</p>
 
-<h2 id="get-list">Get List</h2>
+<h2 id="get-fee-list">Get Fee List</h2>
 
 <p>Get all fee rates for this merchant.</p>
 
 <blockquote>
 <p>Request </p>
 </blockquote>
-<pre class="highlight shell"><code>curl -X POST https://api.tappr.io/v1/businesses/:business_id/fees
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/v1/businesses/:business_id/fees"</span>
+
+</code></pre><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="c1"># List all fees (GET )</span>
+<span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'http://api.tapp.io/v1/businesses/:business_id/fees?page=2'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
+
+        <span class="p">}</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
+
+  <span class="c1"># Create Request</span>
+  <span class="n">req</span> <span class="o">=</span>  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Get</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Authorization"</span><span class="p">,</span> <span class="s2">"Bearer ***** Hidden credentials *****"</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json; charset=utf-8"</span>
+  <span class="c1"># Set body</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">body</span>
+
+  <span class="c1"># Fetch Request</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Status Code: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">code</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Response Body: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
+<span class="k">end</span>
+
+</code></pre><pre class="highlight python"><code><span class="c"># Install the Python Requests library:</span>
+<span class="c"># `pip install requests`</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="c"># List all fees</span>
+    <span class="c"># GET http://api.tappr.io/v1/businesses/:business_id/fees</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"http://api.tappr.io/v1/businesses/:business_id/fees"</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"page"</span><span class="p">:</span> <span class="s">"2"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Bearer ***** Hidden credentials *****"</span><span class="p">,</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+
+</code></pre><pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyRequestController</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">sendRequest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/* Configure session, choose between:
+           * defaultSessionConfiguration
+           * ephemeralSessionConfiguration
+           * backgroundSessionConfigurationWithIdentifier:
+         And set session-wide properties, such as: HTTPAdditionalHeaders,
+         HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+         */</span>
+        <span class="k">let</span> <span class="nv">sessionConfig</span> <span class="o">=</span> <span class="kt">URLSessionConfiguration</span><span class="o">.</span><span class="k">default</span>
+
+        <span class="cm">/* Create session, and optionally set a URLSessionDelegate. */</span>
+        <span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">sessionConfig</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">delegateQueue</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+        <span class="cm">/* Create the Request:
+           List all fees (GET http://api.tappr.io/v1/businesses/:business_id/fees)
+         */</span>
+
+        <span class="k">guard</span> <span class="k">var</span> <span class="nv">URL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://api.tappr.io/v1/businesses/:business_id/fees"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+        <span class="k">let</span> <span class="nv">URLParams</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s">"page"</span><span class="p">:</span> <span class="s">"2"</span><span class="p">,</span>
+        <span class="p">]</span>
+        <span class="kt">URL</span> <span class="o">=</span> <span class="kt">URL</span><span class="o">.</span><span class="nf">appendingQueryParameters</span><span class="p">(</span><span class="kt">URLParams</span><span class="p">)</span>
+        <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"GET"</span>
+
+        <span class="c1">// Headers</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"Bearer ***** Hidden credentials *****"</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Authorization"</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"application/json; charset=utf-8"</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Content-Type"</span><span class="p">)</span>
+
+        <span class="c1">// JSON Body</span>
+
+        <span class="k">let</span> <span class="nv">bodyObject</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+
+        <span class="p">]</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">withJSONObject</span><span class="p">:</span> <span class="n">bodyObject</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[])</span>
+
+        <span class="cm">/* Start a new Task */</span>
+        <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Success</span>
+                <span class="k">let</span> <span class="nv">statusCode</span> <span class="o">=</span> <span class="p">(</span><span class="n">response</span> <span class="k">as!</span> <span class="kt">HTTPURLResponse</span><span class="p">)</span><span class="o">.</span><span class="n">statusCode</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Succeeded: HTTP </span><span class="se">\(</span><span class="n">statusCode</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Failure</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Failed: %@"</span><span class="p">,</span> <span class="n">error</span><span class="o">!.</span><span class="n">localizedDescription</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="nf">finishTasksAndInvalidate</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="kd">protocol</span> <span class="kt">URLQueryParameterStringConvertible</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span><span class="k">get</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">Dictionary</span> <span class="p">:</span> <span class="kt">URLQueryParameterStringConvertible</span> <span class="p">{</span>
+    <span class="cm">/**
+     This computed property returns a query parameters string from the given NSDictionary. For
+     example, if the input is @{@"day":@"Tuesday", @"month":@"January"}, the output
+     string will be @"day=Tuesday&amp;month=January".
+     @return The computed parameters string.
+    */</span>
+    <span class="k">var</span> <span class="nv">queryParameters</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span>
+        <span class="k">var</span> <span class="nv">parts</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="k">in</span> <span class="k">self</span> <span class="p">{</span>
+            <span class="k">let</span> <span class="nv">part</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="s">"%@=%@"</span><span class="p">,</span>
+                <span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="nf">addingPercentEncoding</span><span class="p">(</span><span class="nv">withAllowedCharacters</span><span class="p">:</span> <span class="o">.</span><span class="n">urlQueryAllowed</span><span class="p">)</span><span class="o">!</span><span class="p">,</span>
+                <span class="kt">String</span><span class="p">(</span><span class="nv">describing</span><span class="p">:</span> <span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="nf">addingPercentEncoding</span><span class="p">(</span><span class="nv">withAllowedCharacters</span><span class="p">:</span> <span class="o">.</span><span class="n">urlQueryAllowed</span><span class="p">)</span><span class="o">!</span><span class="p">)</span>
+            <span class="n">parts</span><span class="o">.</span><span class="nf">append</span><span class="p">(</span><span class="n">part</span> <span class="k">as</span> <span class="kt">String</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">parts</span><span class="o">.</span><span class="nf">joined</span><span class="p">(</span><span class="nv">separator</span><span class="p">:</span> <span class="s">"&amp;"</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="kd">extension</span> <span class="kt">URL</span> <span class="p">{</span>
+    <span class="cm">/**
+     Creates a new URL by adding the given query parameters.
+     @param parametersDictionary The query parameter dictionary to add.
+     @return A new URL.
+    */</span>
+    <span class="kd">func</span> <span class="nf">appendingQueryParameters</span><span class="p">(</span><span class="n">_</span> <span class="nv">parametersDictionary</span> <span class="p">:</span> <span class="kt">Dictionary</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">URL</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">URLString</span> <span class="p">:</span> <span class="kt">String</span> <span class="o">=</span> <span class="kt">String</span><span class="p">(</span><span class="nv">format</span><span class="p">:</span> <span class="s">"%@?%@"</span><span class="p">,</span> <span class="k">self</span><span class="o">.</span><span class="n">absoluteString</span><span class="p">,</span> <span class="n">parametersDictionary</span><span class="o">.</span><span class="n">queryParameters</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="kt">URLString</span><span class="p">)</span><span class="o">!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
 
 </code></pre>
 <h3 id="arguments">ARGUMENTS</h3>
@@ -1095,7 +1553,205 @@
 <h2 id="create-fee">Create Fee</h2>
 
 <p>Create a fee rate definition for a business.</p>
-<pre class="highlight shell"><code>curl -X POST https://api.tappr.io/v1/businesses/:business_id/fees
+
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/v1/businesses/:business_id/fees"</span>
+
+</code></pre><pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="c1"># Create a fee (POST )</span>
+<span class="k">def</span> <span class="nf">send_request</span>
+  <span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'http://api.tappr.io/v1/businesses/:business_id/fees'</span><span class="p">)</span>
+
+  <span class="c1"># Create client</span>
+  <span class="n">http</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">.</span><span class="nf">host</span><span class="p">,</span> <span class="n">uri</span><span class="p">.</span><span class="nf">port</span><span class="p">)</span>
+  <span class="n">dict</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"status"</span> <span class="o">=&gt;</span> <span class="s2">"ACTIVE"</span><span class="p">,</span>
+            <span class="s2">"calculation_phase"</span> <span class="o">=&gt;</span> <span class="s2">"TOTAL"</span><span class="p">,</span>
+            <span class="s2">"fee_type"</span> <span class="o">=&gt;</span> <span class="s2">"GOVERNMENT"</span><span class="p">,</span>
+            <span class="s2">"inclusion_type"</span> <span class="o">=&gt;</span> <span class="s2">"ADDITIVE"</span><span class="p">,</span>
+            <span class="s2">"amount"</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="s2">"currency_code"</span> <span class="o">=&gt;</span> <span class="s2">"AUD"</span><span class="p">,</span>
+                <span class="s2">"minor_units"</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+            <span class="p">},</span>
+            <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"GST"</span><span class="p">,</span>
+            <span class="s2">"apply_to_custom_amount"</span> <span class="o">=&gt;</span> <span class="kp">true</span>
+        <span class="p">}</span>
+  <span class="n">body</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">dump</span><span class="p">(</span><span class="n">dict</span><span class="p">)</span>
+
+  <span class="c1"># Create Request</span>
+  <span class="n">req</span> <span class="o">=</span>  <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="o">::</span><span class="no">Post</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Authorization"</span><span class="p">,</span> <span class="s2">"Token "</span>
+  <span class="c1"># Add headers</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">add_field</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json; charset=utf-8"</span>
+  <span class="c1"># Set body</span>
+  <span class="n">req</span><span class="p">.</span><span class="nf">body</span> <span class="o">=</span> <span class="n">body</span>
+
+  <span class="c1"># Fetch Request</span>
+  <span class="n">res</span> <span class="o">=</span> <span class="n">http</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Status Code: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">code</span><span class="si">}</span><span class="s2">"</span>
+  <span class="nb">puts</span> <span class="s2">"Response HTTP Response Body: </span><span class="si">#{</span><span class="n">res</span><span class="p">.</span><span class="nf">body</span><span class="si">}</span><span class="s2">"</span>
+<span class="k">rescue</span> <span class="no">StandardError</span> <span class="o">=&gt;</span> <span class="n">e</span>
+  <span class="nb">puts</span> <span class="s2">"HTTP Request failed (</span><span class="si">#{</span><span class="n">e</span><span class="p">.</span><span class="nf">message</span><span class="si">}</span><span class="s2">)"</span>
+<span class="k">end</span>
+</code></pre><pre class="highlight python"><code><span class="c"># Install the Python Requests library:</span>
+<span class="c"># `pip install requests`</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+
+<span class="k">def</span> <span class="nf">send_request</span><span class="p">():</span>
+    <span class="c"># Create a fee</span>
+    <span class="c"># POST http://api.tappr.io/v1/businesses/:business_id/fees</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+            <span class="n">url</span><span class="o">=</span><span class="s">"http://api.tappr.io/v1/businesses/:business_id/fees"</span><span class="p">,</span>
+            <span class="n">headers</span><span class="o">=</span><span class="p">{</span>
+                <span class="s">"Authorization"</span><span class="p">:</span> <span class="s">"Token "</span><span class="p">,</span>
+                <span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json; charset=utf-8"</span><span class="p">,</span>
+            <span class="p">},</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+                <span class="s">"status"</span><span class="p">:</span> <span class="s">"ACTIVE"</span><span class="p">,</span>
+                <span class="s">"calculation_phase"</span><span class="p">:</span> <span class="s">"TOTAL"</span><span class="p">,</span>
+                <span class="s">"fee_type"</span><span class="p">:</span> <span class="s">"GOVERNMENT"</span><span class="p">,</span>
+                <span class="s">"inclusion_type"</span><span class="p">:</span> <span class="s">"ADDITIVE"</span><span class="p">,</span>
+                <span class="s">"amount"</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">"currency_code"</span><span class="p">:</span> <span class="s">"AUD"</span><span class="p">,</span>
+                    <span class="s">"minor_units"</span><span class="p">:</span> <span class="mi">10</span>
+                <span class="p">},</span>
+                <span class="s">"name"</span><span class="p">:</span> <span class="s">"GST"</span><span class="p">,</span>
+                <span class="s">"apply_to_custom_amount"</span><span class="p">:</span> <span class="bp">True</span>
+            <span class="p">})</span>
+        <span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Status Code: {status_code}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">status_code</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">))</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Response HTTP Response Body: {content}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">content</span><span class="o">=</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">))</span>
+    <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'HTTP Request failed'</span><span class="p">)</span>
+
+</code></pre><pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">MyRequestController</span> <span class="p">{</span>
+    <span class="kd">func</span> <span class="nf">sendRequest</span><span class="p">()</span> <span class="p">{</span>
+        <span class="cm">/* Configure session, choose between:
+           * defaultSessionConfiguration
+           * ephemeralSessionConfiguration
+           * backgroundSessionConfigurationWithIdentifier:
+         And set session-wide properties, such as: HTTPAdditionalHeaders,
+         HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+         */</span>
+        <span class="k">let</span> <span class="nv">sessionConfig</span> <span class="o">=</span> <span class="kt">URLSessionConfiguration</span><span class="o">.</span><span class="k">default</span>
+
+        <span class="cm">/* Create session, and optionally set a URLSessionDelegate. */</span>
+        <span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">URLSession</span><span class="p">(</span><span class="nv">configuration</span><span class="p">:</span> <span class="n">sessionConfig</span><span class="p">,</span> <span class="nv">delegate</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">delegateQueue</span><span class="p">:</span> <span class="kc">nil</span><span class="p">)</span>
+
+        <span class="cm">/* Create the Request:
+           Create a fee (POST http://api.tappr.io/v1/businesses/:business_id/fees)
+         */</span>
+
+        <span class="k">guard</span> <span class="k">var</span> <span class="nv">URL</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">string</span><span class="p">:</span> <span class="s">"http://api.tappr.io/v1/businesses/:business_id/fees"</span><span class="p">)</span> <span class="k">else</span> <span class="p">{</span><span class="k">return</span><span class="p">}</span>
+        <span class="k">var</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">URLRequest</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpMethod</span> <span class="o">=</span> <span class="s">"POST"</span>
+
+        <span class="c1">// Headers</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"Token "</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Authorization"</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="nf">addValue</span><span class="p">(</span><span class="s">"application/json; charset=utf-8"</span><span class="p">,</span> <span class="nv">forHTTPHeaderField</span><span class="p">:</span> <span class="s">"Content-Type"</span><span class="p">)</span>
+
+        <span class="c1">// JSON Body</span>
+
+        <span class="k">let</span> <span class="nv">bodyObject</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s">"status"</span><span class="p">:</span> <span class="s">"ACTIVE"</span><span class="p">,</span>
+            <span class="s">"calculation_phase"</span><span class="p">:</span> <span class="s">"TOTAL"</span><span class="p">,</span>
+            <span class="s">"fee_type"</span><span class="p">:</span> <span class="s">"GOVERNMENT"</span><span class="p">,</span>
+            <span class="s">"inclusion_type"</span><span class="p">:</span> <span class="s">"ADDITIVE"</span><span class="p">,</span>
+            <span class="s">"amount"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="s">"currency_code"</span><span class="p">:</span> <span class="s">"AUD"</span><span class="p">,</span>
+                <span class="s">"minor_units"</span><span class="p">:</span> <span class="mi">10</span>
+            <span class="p">],</span>
+            <span class="s">"name"</span><span class="p">:</span> <span class="s">"GST"</span><span class="p">,</span>
+            <span class="s">"apply_to_custom_amount"</span><span class="p">:</span> <span class="kc">true</span>
+        <span class="p">]</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">httpBody</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">JSONSerialization</span><span class="o">.</span><span class="nf">data</span><span class="p">(</span><span class="nv">withJSONObject</span><span class="p">:</span> <span class="n">bodyObject</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[])</span>
+
+        <span class="cm">/* Start a new Task */</span>
+        <span class="k">let</span> <span class="nv">task</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="nf">dataTask</span><span class="p">(</span><span class="nv">with</span><span class="p">:</span> <span class="n">request</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="p">{</span> <span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?,</span> <span class="nv">response</span><span class="p">:</span> <span class="kt">URLResponse</span><span class="p">?,</span> <span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span> <span class="k">in</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">error</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Success</span>
+                <span class="k">let</span> <span class="nv">statusCode</span> <span class="o">=</span> <span class="p">(</span><span class="n">response</span> <span class="k">as!</span> <span class="kt">HTTPURLResponse</span><span class="p">)</span><span class="o">.</span><span class="n">statusCode</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Succeeded: HTTP </span><span class="se">\(</span><span class="n">statusCode</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// Failure</span>
+                <span class="nf">print</span><span class="p">(</span><span class="s">"URL Session Task Failed: %@"</span><span class="p">,</span> <span class="n">error</span><span class="o">!.</span><span class="n">localizedDescription</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="n">task</span><span class="o">.</span><span class="nf">resume</span><span class="p">()</span>
+        <span class="n">session</span><span class="o">.</span><span class="nf">finishTasksAndInvalidate</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight shell"><code>    <span class="o">{</span>
+        <span class="s2">"name"</span>:  <span class="s2">"GST"</span>,
+        <span class="s2">"status"</span>:  <span class="s2">"ACTIVE"</span>,
+        <span class="s2">"apply_to_custom_amount"</span>:  <span class="nb">true</span>,
+        <span class="s2">"fee_type"</span>:  <span class="s2">"GOVERNMENT"</span>,
+        <span class="s2">"inclusion_type"</span>:  <span class="s2">"ADDITIVE"</span>,
+        <span class="s2">"calculation_phase"</span>:<span class="s2">"TOTAL"</span>,
+        <span class="s2">"amount"</span>:<span class="o">{</span>
+            <span class="s2">"minor_units"</span>:10,
+            <span class="s2">"currency_code"</span>:<span class="s2">"AUD"</span>
+                <span class="o">}</span>
+    <span class="o">}</span>
+
+</code></pre><pre class="highlight ruby"><code>    <span class="p">{</span>
+        <span class="s2">"name"</span><span class="p">:</span>  <span class="s2">"GST"</span><span class="p">,</span>
+        <span class="s2">"status"</span><span class="p">:</span>  <span class="s2">"ACTIVE"</span><span class="p">,</span>
+        <span class="s2">"apply_to_custom_amount"</span><span class="p">:</span>  <span class="kp">true</span><span class="p">,</span>
+        <span class="s2">"fee_type"</span><span class="p">:</span>  <span class="s2">"GOVERNMENT"</span><span class="p">,</span>
+        <span class="s2">"inclusion_type"</span><span class="p">:</span>  <span class="s2">"ADDITIVE"</span><span class="p">,</span>
+        <span class="s2">"calculation_phase"</span><span class="ss">:"TOTAL"</span><span class="p">,</span>
+        <span class="s2">"amount"</span><span class="p">:{</span>
+            <span class="s2">"minor_units"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+            <span class="s2">"currency_code"</span><span class="ss">:"AUD"</span>
+                <span class="p">}</span>
+    <span class="p">}</span>
+
+</code></pre><pre class="highlight python"><code>    <span class="p">{</span>
+        <span class="s">"name"</span><span class="p">:</span>  <span class="s">"GST"</span><span class="p">,</span>
+        <span class="s">"status"</span><span class="p">:</span>  <span class="s">"ACTIVE"</span><span class="p">,</span>
+        <span class="s">"apply_to_custom_amount"</span><span class="p">:</span>  <span class="n">true</span><span class="p">,</span>
+        <span class="s">"fee_type"</span><span class="p">:</span>  <span class="s">"GOVERNMENT"</span><span class="p">,</span>
+        <span class="s">"inclusion_type"</span><span class="p">:</span>  <span class="s">"ADDITIVE"</span><span class="p">,</span>
+        <span class="s">"calculation_phase"</span><span class="p">:</span><span class="s">"TOTAL"</span><span class="p">,</span>
+        <span class="s">"amount"</span><span class="p">:{</span>
+            <span class="s">"minor_units"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+            <span class="s">"currency_code"</span><span class="p">:</span><span class="s">"AUD"</span>
+                <span class="p">}</span>
+    <span class="p">}</span>
+
+</code></pre><pre class="highlight swift"><code>    <span class="p">{</span>
+        <span class="s">"name"</span><span class="p">:</span>  <span class="s">"GST"</span><span class="p">,</span>
+        <span class="s">"status"</span><span class="p">:</span>  <span class="s">"ACTIVE"</span><span class="p">,</span>
+        <span class="s">"apply_to_custom_amount"</span><span class="p">:</span>  <span class="kc">true</span><span class="p">,</span>
+        <span class="s">"fee_type"</span><span class="p">:</span>  <span class="s">"GOVERNMENT"</span><span class="p">,</span>
+        <span class="s">"inclusion_type"</span><span class="p">:</span>  <span class="s">"ADDITIVE"</span><span class="p">,</span>
+        <span class="s">"calculation_phase"</span><span class="p">:</span><span class="s">"TOTAL"</span><span class="p">,</span>
+        <span class="s">"amount"</span><span class="p">:{</span>
+            <span class="s">"minor_units"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span>
+            <span class="s">"currency_code"</span><span class="p">:</span><span class="s">"AUD"</span>
+                <span class="p">}</span>
+    <span class="p">}</span>
 
 </code></pre>
 <h3 id="arguments">ARGUMENTS</h3>
@@ -1123,6 +1779,17 @@
 
 <p>Delete a tax.</p>
 
+<blockquote>
+<p>Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/businesses/:business_id/fees"</span> <span class="se">\</span>
+    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
+</code></pre>
+<blockquote>
+<p>Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
+</span></code></pre>
 <h3 id="arguments">ARGUMENTS</h3>
 
 <table><thead>
@@ -1144,25 +1811,6 @@
 </tr>
 </tbody></table>
 
-<blockquote>
-<p>Request</p>
-</blockquote>
-<pre class="highlight shell"><code>curl -X POST <span class="s2">"https://api.tappr.io/businesses/:business_id/fees"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
-    -d <span class="s1">'{ }'</span>
-
-</code></pre>
-<blockquote>
-<p>Request</p>
-</blockquote>
-<pre class="highlight shell"><code>curl -X GET <span class="s2">"https://api.tappr.io/businesses/:business_id/fees"</span> <span class="se">\</span>
-    -H <span class="s2">"Authorization: Token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ"</span>
-</code></pre>
-<blockquote>
-<p>Response</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre>
           <h1 id="discounts">Discounts</h1>
 
 <h2 id="discount-create">Discount Create</h2>

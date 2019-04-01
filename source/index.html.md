@@ -11,18 +11,6 @@ toc_footers:
   - <a href='https://github.com/Tappr/slate'>Edit on Github</a>
 
 includes:
-  - authorization
-  - pagination
-  - user
-  - roles
-  - order
-  - tender
-  - product
-  - fee
-  - discount
-  - business
-  - location
-  - customers
   - errors
 
 search: true

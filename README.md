@@ -1,3 +1,13 @@
+how to do the deployment?
+------------
+when pushed to master, it will go through our CI and then synced to a s3 bucket on our production env.
+
+
+
+
+
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/lord/img/master/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>

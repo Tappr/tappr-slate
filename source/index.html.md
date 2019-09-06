@@ -20,7 +20,7 @@ Our API is organized around REST, and accetps form-encoded request bodies, with 
 If you have any enviromental or api questions, feel free to click <code> Ask a Question</code> on left.
 </aside>
 
-Host for Development API Endpoint: [https://api.development.tappr.io](<https://api.development.tappr.io>)
+Host for Staging API Endpoints: [https://api.staging.tappr.io](<https://api.staging.tappr.io>)
 
 # POS integration
 This section gives a basic workflow about how to integrate your POS system to Tappr ecosystem, while the Tappr Smart-terminal plays as a payment device (a.k.a PinPad). For this stage, we only support 1 POS to 1 Tappr smart terminal mapping, we will extend the ability in the next stage.
@@ -90,7 +90,7 @@ sign = OpenSSL::HMAC.hexdigest(digest, client_key, concated_string)
 > - Send to tappr api as json request, e.g. curl -d parameter.
 
 ```shell
-curl -X POST https://api.development.tappr.io/v1/pi/transactions \
+curl -X POST https://api.staging.tappr.io/v1/pi/transactions \
      -H "Content-Type: application/json" \
      -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
      -d '{
@@ -128,7 +128,7 @@ The steps to get the value of sign as following:
 > Request:
 
 ```shell
-curl -X POST https://api.development.tappr.io/v1/pi/transactions \
+curl -X POST https://api.staging.tappr.io/v1/pi/transactions \
      -H "Content-Type: application/json" \
      -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
      -d '{
@@ -233,7 +233,7 @@ The `metadata' is a json item, delete this field before sign
 > Request:
 
 ```shell
-curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
+curl -X GET https://api.staging.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
      -H "Content-Type: application/json" \
      -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
      -d '{
@@ -290,7 +290,7 @@ Status | Body | Description
 > Request:
 
 ```shell
-curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
+curl -X GET https://api.staging.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
      -H "Content-Type: application/json" \
      -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
      -d '{

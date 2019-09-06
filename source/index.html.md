@@ -2,8 +2,7 @@
 title: API Reference
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
+  - <a href="mailto:ken.z@tappr.io?Subject=Question%20from%20tappr%20developer%20site" target="_top">Ask a Question</a>
 
 includes:
   - errors
@@ -12,33 +11,35 @@ search: true
 ---
 # Introduction
 
-Welcome to the Tappr API! You can use our API to access Tappr API endpoints.
+Welcome to the Tappr API! 
 
-This document gives a basic workflow about how to integrate your POS system to Tappr ecosystem, while the Tappr Smart-terminal plays as a payment device. For this stage, we support 1 POS to 1 Tappr smart terminal mapping, we will extend the ability in the next stage.
+Our API is organized around REST, and accetps form-encoded request bodies, with JSON-encoded response returned. We follow the standard HTTP response codes and verbs.
 
-You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Environment
+<aside class="notice">
+If you have any enviromental or api questions, feel free to click <code> Ask a Question</code> on left.
+</aside>
 
-# Workflow
+Host for Development API Endpoint: [https://api.development.tappr.io](<https://api.development.tappr.io>)
+
+# 3rd Party POS integration
+This section gives a basic workflow about how to integrate your POS system to Tappr ecosystem, while the Tappr Smart-terminal plays as a payment device (a.k.a PinPad). For this stage, we only support 1 POS to 1 Tappr smart terminal mapping, we will extend the ability in the next stage.
+
+You can view code examples in the dark area on the right.
+
+## Workflow
 ![](images/tappr-three-party-workflow.png)
+<a href="images/tappr-three-party-workflow.png" target="_blank">Click here for the large version of chart</a>
 
-# Getting started
-
-### What information do I need from the Tappr merchant to integrate our POS system?
+## What information do I need from the Tappr merchant to integrate our POS system?
 
 Ask the Tappr merchant to get the values for `client_id`, `client_key`, and `tenant_id` (default tenant id will be tappr tenant id if missing), these info will be used during authentication and sending the request to Tappr API.
 
-### What information should I give to the Tappr merchant?
+## What information should I give to the Tappr merchant?
 
 The `pos_id` (pos terminal id) and `callback_url` should be given to the Tappr merchant, so that Tappr merchant can set these values while they setup the POS integration in their account on the Tappr Dashboard.
 
-# Environment
-
-### Development
-
-Endpoint: https://api.development.tappr.io
-
-
-# Authentication
+## Authentication
 
 ### signature
 
@@ -105,11 +106,11 @@ curl -X POST https://api.development.tappr.io/v1/pi/transactions \
 ```
 
 
-For security reason, Tappr requires a signature present on every request sent to tappr api. Here are the steps to get the value of `sign` for the above example of **sending payment request**.
+For security reason, Tappr requires a signature present on every request sent to tappr api. Here are the steps to get the value of `sign` for the step of **sending payment request** in above workflow.
 
-Assume the client_key you get from tappr is: `932a87fb-f1fa-40b1-861a-2be0488d576d`
+Assume the `client_key` you get from tappr is: `932a87fb-f1fa-40b1-861a-2be0488d576d`
 
-The steps to get the value of sign:
+The steps to get the value of sign as following:
 
 
 1. Sort the parameters by key in alphabetical order:
@@ -118,9 +119,9 @@ The steps to get the value of sign:
 4. Merge the sign into parameters
 5. Send to tappr api as json request, e.g. curl -d parameter.
 
-# Transactions
+## Transactions
 
-## Create a transaction
+### Create a transaction
 
 > POST /v1/pi/transactions
 
@@ -167,7 +168,7 @@ Refer to [Authentication](#authentication) to learn how to get the value of sign
 
 If a transaction is created, the transaction object will be returned with status of waiting waiting for tappr smart terminal to complete the payment.
 
-### Parameter
+#### Parameter
 
 Parameter | Type | Description
 --------- | ------- | -----------
@@ -182,7 +183,7 @@ sign | string | See [Authentication](#authentication)
 
 
 
-### Error
+#### Error
 Status | Body | Description
 --------- | ------- | -----------
 400 | {"error":"minor_units is missing, currency_code is missing, pos_id is missing"} | Required params missing
@@ -191,7 +192,7 @@ Status | Body | Description
 400 | {"error":"There is no activated Tappr device"} | Device status is not activated
 400 | {"error":"There is no online Tappr device"} | Device is offline
 
-## Notification transaction result
+### Get notified of transaction result
 
 ```shell
 curl -X POST http://example.com/notify \
@@ -225,7 +226,7 @@ Tappr will initialise the request on the right to your `callback_url`
 The `metadata' is a json item, delete this field before sign
 
 
-## Get a transaction
+### Get a transaction
 
 > GET /v1/pi/transactions/:id
 
@@ -266,7 +267,7 @@ curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4a
 
 The 3rd party POS system can find a transaction by id.
 
-### Parameter
+#### Parameter
 
 Parameter | Type | Description
 --------- | ------- | -----------
@@ -276,13 +277,13 @@ sign_version | string | 1
 timestamp | int | Unix timestamp
 sign | string | See [Authentication](#authentication)
 
-### Error
+#### Error
 
 Status | Body | Description
 --------- | ------- | -----------
 404 | {"error":"Transaction not found"} | The transaction is not found
 
-## Update a transaction
+### Update a transaction
 
 > GET /v1/pi/transactions/:id
 
@@ -322,7 +323,7 @@ curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4a
 }
 ```
 
-### Parameter
+#### Parameter
 
 The 3rd party POS system update the transaction status to `cancelled`(only supported cancelled).
 
@@ -336,7 +337,7 @@ sign_version | string | 1
 timestamp | int | Unix timestamp
 sign | string | See [Authentication](#authentication)
 
-### Error
+#### Error
 
 Status | Body | Description
 --------- | ------- | -----------
@@ -346,54 +347,4 @@ Status | Body | Description
 
 
 
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 

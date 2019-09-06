@@ -22,7 +22,7 @@ If you have any enviromental or api questions, feel free to click <code> Ask a Q
 
 Host for Development API Endpoint: [https://api.development.tappr.io](<https://api.development.tappr.io>)
 
-# 3rd Party POS integration
+# POS integration
 This section gives a basic workflow about how to integrate your POS system to Tappr ecosystem, while the Tappr Smart-terminal plays as a payment device (a.k.a PinPad). For this stage, we only support 1 POS to 1 Tappr smart terminal mapping, we will extend the ability in the next stage.
 
 You can view code examples in the dark area on the right.
@@ -217,7 +217,7 @@ curl -X POST http://example.com/notify \
 
 We use the async way to get you notified about the payment result, for sending the result to the `callback_url` (**Note**: must be **https,** and the **query parameters** will be **ignored**)you registered with Tappr.
 
-In general, the data-flow will be like this: After creating the transaction, Tappr API will broadcast to Tappr Device to process the payment. And Tappr Device will submit the payment result to update the transaction status(approved or declined). As soon as the transaction status updated, Tappr API will request the `integration.callback_url` to notify the 3rd POS system with the transaction object.
+In general, the data-flow will be like this: After creating the transaction, Tappr API will broadcast to Tappr Device to process the payment. And Tappr Device will submit the payment result to update the transaction status(approved or declined). As soon as the transaction status updated, Tappr API will request the `integration.callback_url` to notify the POS system with the transaction object.
 
 For example: your `integration.callback_url` : `https://example.com/notify`
 
@@ -265,7 +265,7 @@ curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4a
 }
 ```
 
-The 3rd party POS system can find a transaction by id.
+The POS system can find a transaction by id.
 
 #### Parameter
 
@@ -325,7 +325,7 @@ curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4a
 
 #### Parameter
 
-The 3rd party POS system update the transaction status to `cancelled`(only supported cancelled).
+The POS system update the transaction status to `cancelled`(only supported cancelled).
 
 Parameter | Type | Description
 --------- | ------- | -----------

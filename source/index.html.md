@@ -11,7 +11,7 @@ search: true
 ---
 # Introduction
 
-Welcome to the Tappr API! 
+Welcome to the Tappr developer portal! 
 
 Our API is organized around REST, and accetps form-encoded request bodies, with JSON-encoded response returned. We follow the standard HTTP response codes and verbs.
 

@@ -34,6 +34,15 @@ under the License.
     <style>
       <%= Rouge::Themes::MonokaiSublime.render(:scope => '.highlight') %>
     </style>
+   
+    <link rel="icon" type="image/png" sizes="192x192"  href="/images/icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/images/icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/images/icon.png">
+    <meta name="theme-color" content="#ffffff">
     <%= stylesheet_link_tag :screen, media: :screen %>
     <%= stylesheet_link_tag :print, media: :print %>
     <% if current_page.data.search %>

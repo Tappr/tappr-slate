@@ -1,4 +1,4 @@
-how to do the deployment?
+how to do the deployment on tappr env?
 ------------
 when pushed to master, it will go through our CI and then synced to a s3 bucket on our production env.
 

@@ -1,14 +1,9 @@
 ---
 title: API Reference
 
-language_tabs:
-  - shell
-  - ruby
-  - python
-  - swift
-
 toc_footers:
-  - <a href='https://github.com/Tappr/slate'>Edit on Github</a>
+  - <a href='#'>Sign Up for a Developer Key</a>
+  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
   - errors
@@ -17,213 +12,340 @@ search: true
 ---
 # Introduction
 
-```shell
-
-  API endpoint
-  https://api.tappr.io
-
-```
-
-```ruby
-
-  API endpoint
-  https://api.tappr.io
-
-```
-
-```python
-
-  API endpoint
-  https://api.tappr.io
-
-```
-
-```swift
-
-  API endpoint
-  https://api.tappr.io
-
-```
-
 Welcome to the Tappr API! You can use our API to access Tappr API endpoints.
 
-You can view code examples in the dark area to the right.
+This document gives a basic workflow about how to integrate your POS system to Tappr ecosystem, while the Tappr Smart-terminal plays as a payment device. For this stage, we support 1 POS to 1 Tappr smart terminal mapping, we will extend the ability in the next stage.
 
-Our developers’ community in Slack is the place to get help with our API, discuss ideas, and show off what you build. Hit the link below to join. 
+You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-  <script async defer src="https://slackin-tpsaqfrvhh.now.sh/slackin.js"></script>
+# Workflow
+![](images/tappr-three-party-workflow.png)
 
-  <aside class="notice">Tappr API doc. This is a WORKING copy and will change.</aside>
+# Getting started
 
-## Standards
+### What information do I need from the Tappr merchant to integrate our POS system?
 
-Tappr's API is built with commonly used RESTful design patterns in the industry. Below you'll see all the Tappr services and can access through HTTP semantics. HTTPS stauts codes are used to communicate the states, OAuth 2.0 is used for API Authentication and Authorisations.
+Ask the Tappr merchant to get the values for `client_id`, `client_key`, and `tenant_id` (default tenant id will be tappr tenant id if missing), these info will be used during authentication and sending the request to Tappr API.
 
-## Date and Times
+### What information should I give to the Tappr merchant?
 
-All date time values are in UTC and is formatted
+The `pos_id` (pos terminal id) and `callback_url` should be given to the Tappr merchant, so that Tappr merchant can set these values while they setup the POS integration in their account on the Tappr Dashboard.
+
+# Environment
+
+### Development
+
+Endpoint: https://api.development.tappr.io
+
 
 # Authentication
 
-> To authorize, use this code:
+### signature
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> - Sorted parameters in JSON format
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
 
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+	"client_id": "d076d78c-9fd1-4287-8b52-cd779c48dd48",
+	"currency_code": "AU",
+	"minor_units": 100,
+	"pos_id": "pos_1234",
+	"sign_method": "hmac_sha256",
+	"sign_version": "1",
+	"timestamp": 1553654797
 }
 ```
 
-This endpoint retrieves a specific kitten.
+> - Concatenated string
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+```shell
+concated_string = "client_idd076d78c-9fd1-4287-8b52-cd779c48dd48currency_codeAUminor_units100pos_idpos_1234sign_methodhmac_sha256sign_version1timestamp1553654797"
+```
 
-### HTTP Request
+> - Hash the concatenated string with `client_key` using `hmac_sha256`
 
-`GET http://example.com/kittens/<ID>`
 
-### URL Parameters
+```ruby
+digest = OpenSSL::Digest.new('sha256')
+sign = OpenSSL::HMAC.hexdigest(digest, client_key, concated_string)
+```
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+> - Merge the sign into parameters
+
+```json
+{
+	"client_id": "d076d78c-9fd1-4287-8b52-cd779c48dd48",
+	"currency_code": "AU",
+	"minor_units": 100,
+	"pos_id": "pos_1234",
+	"sign_method": "hmac_sha256",
+	"sign_version": "1",
+	"timestamp": 1553654797,
+	"sign": "4445fe5f50095614a2a2f2c27ccf2b9f754446b81562a9fc2c110081020e1956"
+}
+```
+
+> - Send to tappr api as json request, e.g. curl -d parameter.
+
+```shell
+curl -X POST https://api.development.tappr.io/v1/pi/transactions \
+     -H "Content-Type: application/json" \
+     -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
+     -d '{
+             "client_id":"d076d78c-9fd1-4287-8b52-cd779c48dd48",
+             "sign_method":"hmac_sha256",
+             "sign_version":"1",
+             "timestamp":1553654797,
+             "minor_units":100,
+             "currency_code":"AU",
+             "pos_id":"pos_1234",
+             "sign":"4445fe5f50095614a2a2f2c27ccf2b9f754446b81562a9fc2c110081020e1956"
+     }'
+```
+
+
+For security reason, Tappr requires a signature present on every request sent to tappr api. Here are the steps to get the value of `sign` for the above example of **sending payment request**.
+
+Assume the client_key you get from tappr is: `932a87fb-f1fa-40b1-861a-2be0488d576d`
+
+The steps to get the value of sign:
+
+
+1. Sort the parameters by key in alphabetical order:
+2. Concatenate them in `"keyvaluekeyvalue..."` pattern:
+3. Hash the concatenated string with `client_key` using `hmac_sha256`
+4. Merge the sign into parameters
+5. Send to tappr api as json request, e.g. curl -d parameter.
+
+# Transactions
+
+## Create a transaction
+
+> POST /v1/pi/transactions
+
+> Request:
+
+```shell
+curl -X POST https://api.development.tappr.io/v1/pi/transactions \
+     -H "Content-Type: application/json" \
+     -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
+     -d '{
+             "client_id":"d076d78c-9fd1-4287-8b52-cd779c48dd48",
+             "sign_method":"hmac_sha256",
+             "sign_version":"1",
+             "timestamp":1553654797,
+             "minor_units":100,
+             "currency_code":"AU",
+             "pos_id":"pos_1234",
+             "pos_reference":"pos_order_reference",
+             "sign":"2d99bb821873910263863bfd64ba5d90027bb18936b9544454ad691c6569cf3e"
+     }'
+```
+
+> Response:
+
+```json
+{
+	"id":"cdf73e94-5d28-4ada-8990-520e16497fe4",
+	"business_id":"21d1f8f4-a007-4181-9782-2e02eec29d0c",
+	"integration_id":"fa7ae1f2-7f0a-4df5-85f3-5b95f61907d1",
+	"device_id":"44a1acc8-7f35-4ea2-a0e2-f8fd41737054",
+	"pos_id":"pos_1234",
+	"pos_reference": "pos_order_reference",
+	"status":"waiting",
+	"version":"e01e4561371098a42f3ec5958cd6476c",
+	"minor_units":100,
+	"currency_code":"AU",
+	"created_at":1553663382,
+	"updated_at":1553663382
+}
+```
+
+Create a transaction to take payment.
+Refer to [Authentication](#authentication) to learn how to get the value of sign in request params.
+
+If a transaction is created, the transaction object will be returned with status of waiting waiting for tappr smart terminal to complete the payment.
+
+### Parameter
+
+Parameter | Type | Description
+--------- | ------- | -----------
+client_id | string | Get from Tappr merchant
+sign_method | string | hmac_sha256
+sign_version | string | 1
+timestamp | int | Unix timestamp
+currency_code | string | AU
+pos_id | string | POS unique id
+pos_reference | string | POS order reference
+sign | string | See [Authentication](#authentication)
+
+
+
+### Error
+Status | Body | Description
+--------- | ------- | -----------
+400 | {"error":"minor_units is missing, currency_code is missing, pos_id is missing"} | Required params missing
+400 | {"error":"You have not integrated with Tappr"} | Can't find integration by client_id
+400 | {"error":"You have not integrated with Tappr device"} | Can't find device by pos_id
+400 | {"error":"There is no activated Tappr device"} | Device status is not activated
+400 | {"error":"There is no online Tappr device"} | Device is offline
+
+## Notification transaction result
+
+```shell
+curl -X POST http://example.com/notify \
+     -H "Content-Type: application/json" \
+     -d '{
+             "client_id":"d076d78c-9fd1-4287-8b52-cd779c48dd48",
+             "id":"cdf73e94-5d28-4ada-8990-520e16497fe4",
+             "business_id":"21d1f8f4-a007-4181-9782-2e02eec29d0c",
+             "integration_id":"fa7ae1f2-7f0a-4df5-85f3-5b95f61907d1",
+             "device_id":"44a1acc8-7f35-4ea2-a0e2-f8fd41737054",
+             "status":"approved",
+             "minor_units":100,
+             "currency_code":"AU",
+             "version":"459e0b2b41fa475a2c2024e1be125601",
+             "sign_method":"hmac_sha256",
+             "sign_version":"1",
+             "timestamp":1553654797,
+             "sign":"ce7a6dd63912dc03b2389d5001e61e00865b2dca45d162ecdfe718dbd5c69676",
+             "metadata":{}
+     }'
+```
+
+We use the async way to get you notified about the payment result, for sending the result to the `callback_url` (**Note**: must be **https,** and the **query parameters** will be **ignored**)you registered with Tappr.
+
+In general, the data-flow will be like this: After creating the transaction, Tappr API will broadcast to Tappr Device to process the payment. And Tappr Device will submit the payment result to update the transaction status(approved or declined). As soon as the transaction status updated, Tappr API will request the `integration.callback_url` to notify the 3rd POS system with the transaction object.
+
+For example: your `integration.callback_url` : `https://example.com/notify`
+
+Tappr will initialise the request on the right to your `callback_url`
+
+The `metadata' is a json item, delete this field before sign
+
+
+## Get a transaction
+
+> GET /v1/pi/transactions/:id
+
+> Request:
+
+```shell
+curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
+     -H "Content-Type: application/json" \
+     -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
+     -d '{
+             "client_id":"d076d78c-9fd1-4287-8b52-cd779c48dd48",
+             "sign_method":"hmac_sha256",
+             "sign_version":"1",
+             "timestamp":1553654797,
+             "sign":"..."
+     }'
+```
+
+
+> Response:
+
+```json
+{
+	"id":"cdf73e94-5d28-4ada-8990-520e16497fe4",
+	"business_id":"21d1f8f4-a007-4181-9782-2e02eec29d0c",
+	"integration_id":"fa7ae1f2-7f0a-4df5-85f3-5b95f61907d1",
+	"device_id":"44a1acc8-7f35-4ea2-a0e2-f8fd41737054",
+	"pos_id":"pos_1234",
+	"pos_reference": "pos_order_reference",
+	"status":"waiting",
+	"version":"e01e4561371098a42f3ec5958cd6476c",
+	"minor_units":100,
+	"currency_code":"AU",
+	"created_at":1553663382,
+	"updated_at":1553663382
+}
+```
+
+The 3rd party POS system can find a transaction by id.
+
+### Parameter
+
+Parameter | Type | Description
+--------- | ------- | -----------
+client_id | string | Get from Tappr merchant
+sign_method | string | hmac_sha256
+sign_version | string | 1
+timestamp | int | Unix timestamp
+sign | string | See [Authentication](#authentication)
+
+### Error
+
+Status | Body | Description
+--------- | ------- | -----------
+404 | {"error":"Transaction not found"} | The transaction is not found
+
+## Update a transaction
+
+> GET /v1/pi/transactions/:id
+
+> Request:
+
+```shell
+curl -X GET https://api.development.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
+     -H "Content-Type: application/json" \
+     -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
+     -d '{
+             "client_id":"d076d78c-9fd1-4287-8b52-cd779c48dd48",
+             "status":"cancelled",
+             "version":"e01e4561371098a42f3ec5958cd6476c",
+             "sign_method":"hmac_sha256",
+             "sign_version":"1",
+             "timestamp":1553654797,
+             "sign":"..."
+     }'
+```
+
+> Response:
+
+```json
+{
+	"id":"cdf73e94-5d28-4ada-8990-520e16497fe4",
+	"business_id":"21d1f8f4-a007-4181-9782-2e02eec29d0c",
+	"integration_id":"fa7ae1f2-7f0a-4df5-85f3-5b95f61907d1",
+	"device_id":"44a1acc8-7f35-4ea2-a0e2-f8fd41737054",
+	"pos_id":"pos_1234",
+	"pos_reference": "pos_order_reference",
+	"status":"cancelled",
+	"version":"d02efx61371098a42f3ec4958cd837ut",
+	"minor_units":100,
+	"currency_code":"AU",
+	"created_at":1553663382,
+	"updated_at":1553663382
+}
+```
+
+### Parameter
+
+The 3rd party POS system update the transaction status to `cancelled`(only supported cancelled).
+
+Parameter | Type | Description
+--------- | ------- | -----------
+client_id | string | Get from Tappr merchant
+status | string | Only supported `cancelled`
+version | string | Get from transaction.version
+sign_method | string | hmac_sha256
+sign_version | string | 1
+timestamp | int | Unix timestamp
+sign | string | See [Authentication](#authentication)
+
+### Error
+
+Status | Body | Description
+--------- | ------- | -----------
+404 | {"error":"The transaction is not found"} | The transaction is not found
+400 | {"error":"The version is out of date"} | The version is out of date
+400 | {"error":"Can't update status from #{old_status} to #{new_status}"} | Only can update status from pending to cancelled
+
+
+
 
 ## Delete a Specific Kitten
 

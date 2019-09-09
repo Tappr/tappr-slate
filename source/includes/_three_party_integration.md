@@ -1,16 +1,3 @@
-# Introduction
-
-Welcome to the Tappr developer portal! 
-
-Our API is organized around REST, and accetps form-encoded request bodies, with JSON-encoded response returned. We follow the standard HTTP response codes and verbs.
-
-# Environment
-<aside class="notice">
-If you have any enviromental or api questions, feel free to click <code> Ask a Question</code> on left.
-</aside>
-
-Host for Staging API Endpoints: [https://api.staging.tappr.io](<https://api.staging.tappr.io>)
-
 # POS integration
 This section gives a basic workflow about how to integrate your POS system to Tappr ecosystem, while the Tappr Smart-terminal plays as a payment device (a.k.a PinPad). For this stage, we only support 1 POS to 1 Tappr smart terminal mapping, we will extend the ability in the next stage.
 

@@ -241,7 +241,9 @@ curl -X GET https://api.staging.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8
 }
 ```
 
-The POS system can find a transaction by id.
+The POS system can find a transaction by id. put the `:id` value on the route to fetch the transaction like below. 
+
+GET /v1/pi/transactions/:id
 
 #### Parameter
 
@@ -260,13 +262,15 @@ Status | Body | Description
 404 | {"error":"Transaction not found"} | The transaction is not found
 
 ### Update a transaction
+PUT /v1/pi/transactions/:id
 
-> GET /v1/pi/transactions/:id
+
+> PUT /v1/pi/transactions/:id
 
 > Request:
 
 ```shell
-curl -X GET https://api.staging.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
+curl -X PUT https://api.staging.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8990-520e16497fe4 \
      -H "Content-Type: application/json" \
      -H "Tenant-Id: 27fe01d3-ea58-4e3b-bbc4-a6757473c6ab" \
      -d '{
@@ -301,12 +305,12 @@ curl -X GET https://api.staging.tappr.io/v1/pi/transactions/cdf73e94-5d28-4ada-8
 
 #### Parameter
 
-The POS system update the transaction status to `cancelled`(only supported cancelled).
+The POS system can update the transaction status to `cancelled` ( `cancelled` is the only status supported for now).
 
 Parameter | Type | Description
 --------- | ------- | -----------
 client_id | string | Get from Tappr merchant
-status | string | Only supported `cancelled`
+status | string | Only `cancelled` supported 
 version | string | Get from transaction.version
 sign_method | string | hmac_sha256
 sign_version | string | 1

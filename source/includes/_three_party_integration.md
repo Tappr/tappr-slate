@@ -170,6 +170,8 @@ Status | Body | Description
 
 ### Get notified of transaction result
 
+#### async way
+
 ```shell
 curl -X POST http://example.com/notify \
      -H "Content-Type: application/json" \
@@ -201,6 +203,10 @@ Tappr will initialise the request on the right to your `callback_url`
 
 The `metadata' is a json item, delete this field before sign
 
+#### polling 
+if the async way is not fit for you, you are also able to poll the transaction to get the latest the status. 
+
+refer to the following section of *Get a transaction* for more
 
 ### Get a transaction
 

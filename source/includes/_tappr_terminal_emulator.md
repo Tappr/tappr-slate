@@ -19,6 +19,8 @@ Create your own test account at [Tappr dashboard](https://tappr.dashboard.stagin
 6.	Enter your 6 digits activation in your TapprSmartTerminal emulator
 7.	Once the TapprSmartTerminal activated. You can enter any amount on keyboard to start test the transaction
 
+note: our latest internal version is at [shared file](https://drive.google.com/drive/u/1/folders/1ZkKy71REdczVM38TDsoM8a_Ff-sq_J9s), contact us if you need latest features
+
 ## POS integration
 
 Tappr Terminal support 3rd POS system integrated with Tappr device via Tappr API, please see [POS Integration] (#pos-integration)

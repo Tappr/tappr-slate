@@ -139,7 +139,7 @@ curl -X POST https://api.staging.tappr.io/v1/pi/transactions \
 }
 ```
 
-Create a transaction to take payment.
+Create a transaction to take payment or perform a refund.
 Refer to [Authentication](#authentication) to learn how to get the value of sign in request params.
 
 If a transaction is created, the transaction object will be returned with status of waiting waiting for tappr smart terminal to complete the payment.
@@ -152,6 +152,7 @@ client_id | string | Get from Tappr merchant
 sign_method | string | hmac_sha256
 sign_version | string | 1
 timestamp | int | Unix timestamp
+minor_units | init | cents for the amount. *Positive for payment, set negative if for refund*
 currency_code | string | AU
 pos_id | string | POS unique id
 pos_reference | string | POS order reference

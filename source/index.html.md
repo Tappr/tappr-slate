@@ -13,6 +13,9 @@ search: true
 ---
 
 # Introduction
+- LAST UPDATED: 2020-02-14
+- NOTES: add refund details
+- CONTACT: ken.z@tappr.io
 
 Welcome to the Tappr developer portal! 
 
